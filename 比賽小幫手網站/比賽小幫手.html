@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>比賽小幫手</title>
+    <style>
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fc;
+            color: #333;
+        }
+        header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #357abd;
+            padding: 0.5rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        section {
+            padding: 2rem;
+            max-width: 900px;
+            margin: auto;
+        }
+        .cta-button {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #4a90e2;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .cta-button:hover {
+            background-color: #357abd;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+/* 指令主要父容器，控制整體排版 */
+.command-section {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    max-width: 800px; /* 限制內容最大寬度 */
+    margin: 0 auto; /* 水平置中 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 輕微陰影效果 */
+}
+
+/* 確保每個區塊間有清晰的間距 */
+.command {
+    margin-bottom: 30px; /* 垂直間距，與下一個區塊分開 */
+    padding: 20px;
+    background-color: #e6f7ff;
+    border: 1px solid #b3d9ff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 增加層次感 */
+}
+
+/* 優化每段文字的行距和結構 */
+.command p {
+    margin: 10px 0; /* 更加適當的段落間距 */
+    line-height: 1.6; /* 行距增加，可讀性更好 */
+}
+
+/* 圖片或 GIF 的樣式保持不變 */
+.demo-gif {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: block;
+    max-width: 100%; /* 確保圖片不會超出區塊 */
+    height: auto;
+    margin: 10px auto;
+}
+
+/* 指令介紹區域的主容器樣式 */
+.command-section {
+            padding: 20px; /* 四周內部留白 */
+            background-color: #f9f9f9; /* 背景顏色：淡灰色 */
+            border-radius: 10px; /* 邊角圓滑 */
+            max-width: 800px; /* 最大寬度 */
+            margin: 0 auto; /* 水平置中 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加輕微陰影，增強層次感 */
+        }
+
+        /* 每個指令區塊的基礎樣式 */
+        .command-block {
+            margin-bottom: 30px; /* 區塊間距，讓每段內容分開 */
+            padding: 20px; /* 內部留白 */
+            border-radius: 8px; /* 邊角圓滑 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加陰影效果，增加立體感 */
+            color: rgb(0, 0, 0); /* 預設文字顏色為白色 */
+        }
+
+        /* 各指令區塊的背景顏色 */
+        .blue-bg { background-color: #b3d9ff; } /* 比賽管理指令：藍色背景 */
+        .red-bg { background-color: #ee7b9a; } /* 選手管理指令：紅色背景 */
+        .yellow-bg { background-color: #f5bf69; } /* 比賽樹狀圖指令：黃色背景 */
+        .green-bg { background-color: #ade96d; } /* 瑞士倫無淘汰：綠色背景 */
+        .purple-bg { background-color: #bf83f0; }/* 提醒與公告指令：紫色背景 */
+        .grey-bg { background-color: #abafa7; }/* 指令查詢：綠色背景 */
+        /* 列表樣式：移除預設的樣式 */
+        .command-block ul {
+            margin: 0; /* 去除列表的外邊距 */
+            padding: 0; /* 去除列表的內邊距 */
+            list-style-type: none; /* 去除預設的項目符號 */
+        }
+
+        /* 列表項目樣式 */
+        .command-block ul li {
+            margin-bottom: 10px; /* 每個項目間距 */
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>比賽小幫手</h1>
+        <p>專為電競比賽設計的 Discord 小工具</p>
+    </header>
+
+    <nav>
+        <a href="#intro">專題介紹</a>
+        <a href="#features">功能展示</a>
+        <a href="#commands">指令介紹</a>
+        <a href="#contact">聯絡我們</a>
+    </nav>
+
+    <section id="intro">
+        <h2>專題介紹</h2>
+        <p>大家好！我們是崑山科技大學資工系的學生，今天很高興向大家介紹我們的專題作品——「比賽小幫手」。這是一款專為電競比賽設計的小工具，旨在幫助比賽主辦者更有效率的管理賽事流程。</p>
+        <p>我們觀察到許多線上比賽的賽事通知和溝通平台多以 Discord 為主。因此，我們的專題開發了一款名為「比賽小幫手」的 Discord 聊天室機器人，透過這個機器人，主辦方能夠簡化比賽的管理操作，讓賽事更有條理、更順暢。</p>
+        <p>比賽小幫手主要具備以下功能：</p>
+        <ul>
+            <li>單敗淘汰賽樹狀圖生成：機器人能自動繪製單敗淘汰賽的樹狀圖，清晰呈現比賽進程。</li>
+            <li>分數統計與管理：比賽小幫手支援兩種計分模式：</li>
+            <ul>
+                <li>一般模式：適用於 1v1 賽制，選手間一對一比賽，勝者獲得一分。此模式常用於搶幾分（bo）的比賽，選手達到指定分數即可結束比賽。</li>
+                <li>瑞士倫賽制（無淘汰）：此模式適合遊戲王、爐石戰記、寶可夢等卡牌遊戲比賽。第一輪隨機匹配，之後的輪次會根據選手分數相近來進行匹配，最終選手可以透過指令查看排名或晉級結果。</li>
+                <li>瑞士倫賽制（淘汰）：此模式適合英雄聯盟、傳說對決相關的 MOBA 類遊戲。規則與無淘汰版類似，但會計算敗分，達到指定的淘汰分數就會被淘汰，而達到指定獲勝分數就可以晉級。</li>
+            </ul>
+        </ul>
+        <a href="#features" class="cta-button">查看更多功能</a>
+    </section>
+
+    <section id="features">
+        <h2>功能簡介</h2>
+        <ul>
+            <li>單敗淘汰賽樹狀圖生成</li>
+            <li>分數統計與管理</li>
+            <li>瑞士倫賽制：無淘汰模式與淘汰模式</li>
+            <li>比賽提醒與公告功能</li>
+        </ul>
+    </section>
+
+    <section id="commands" class="command-section">
+        <h2>指令介紹</h2>
+        <div class="command-block blue-bg">
+            <h1>比賽管理指令</h1>
+            <h3>/比賽管理-創建比賽</h3>
+            <p>
+                <strong>使用介紹：</strong> 輸入比賽名稱創建一個比賽資料夾。
+            </p>
+            <p>
+                <strong>用法：</strong> <code>/比賽管理-創建比賽 {比賽名稱} 輸出後顯示 比賽 "測試" 已成功創建！</code>
+            </p>
+            <p>
+                <strong>使用權限：</strong> 有管理員身分組。
+            </p>
+            <!-- 新增 GIF 示範 -->
+            <div class="command-demo">
+                <p><strong>操作示範：</strong></p>
+                <img 
+                src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+                alt="操作示範 GIF" 
+                class="demo-gif" 
+                width="700" 
+                height="400">
+
+            </div>
+                <h3>/比賽管理-比賽編輯模式選擇</h3>
+                <p>
+                    <strong>使用介紹：</strong> 選擇一個比賽資料夾進入編輯模式。
+                </p>
+                <p>
+                    <strong>用法：</strong> <code>/比賽管理-比賽編輯模式選擇 輸出後出現選項 選擇好後會出現已選擇比賽資料夾：測試 字樣</code>
+                </p>
+                <p>
+                    <strong>使用權限：</strong> 有管理員身分組。
+                </p>
+                <!-- 新增 GIF 示範 -->
+                <div class="command-demo">
+                    <p><strong>操作示範：</strong></p>
+                    <img 
+                    src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+                    alt="操作示範 GIF" 
+                    class="demo-gif" 
+                    width="700" 
+                    height="400">
+    
+                </div>
+                    <h3>/比賽管理-退出比賽編輯模式</h3>
+                    <p>
+                        <strong>使用介紹：</strong> 退出選擇的比賽資料夾。
+                    </p>
+                    <p>
+                        <strong>用法：</strong> <code>/比賽管理-退出比賽編輯模式 輸出後會顯示 已退出比賽編輯模式。 字樣</code>
+                    </p>
+                    <p>
+                        <strong>使用權限：</strong> 有管理員身分組。
+                    </p>
+                    <!-- 新增 GIF 示範 -->
+                    <div class="command-demo">
+                        <p><strong>操作示範：</strong></p>
+                        <img 
+                        src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+                        alt="操作示範 GIF" 
+                        class="demo-gif" 
+                        width="700" 
+                        height="400">
+        
+                    </div>
+                        <h3>/比賽管理-刪除目前資料夾</h3>
+                        <p>
+                            <strong>使用介紹：</strong> 移除比賽資料夾。
+                        </p>
+                        <p>
+                            <strong>用法：</strong> <code>/比賽管理-刪除目前資料夾 輸出後回有一個防呆機制，可以選擇刪除或取消按下刪除。<br>按下刪除會出現比賽資料夾 '測試' 已成功刪除。字樣<br>取消則是 操作已取消。字樣</code>
+                        </p>
+                        <p>
+                            <strong>使用權限：</strong> 有管理員身分組。
+                        </p>
+                        <!-- 新增 GIF 示範 -->
+                        <div class="command-demo">
+                            <p><strong>操作示範：</strong></p>
+                            <img 
+                            src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+                            alt="操作示範 GIF" 
+                            class="demo-gif" 
+                            width="700" 
+                            height="400">
+            
+                        </div>
+
+                        </div>
+
+                        <div class="command-block red-bg">
+                            <h1>選手管理指令</h1>
+                            <h3>/選手管理-添加選手</h3>
+                            <p>
+                                <strong>使用介紹：</strong> 輸入參賽名字後，即可報名比賽。
+                            </p>
+                            <p>
+                                <strong>用法：</strong> <code>/選手管理-添加選手 {選手名稱} 輸出後顯示 選手 '{選手名稱}' 已成功添加到比賽中。</code>
+                            </p>
+                            <p>
+                                <strong>使用權限：</strong> 有管理員和選手身分組。
+                            </p>
+                            <!-- 新增 GIF 示範 -->
+                            <div class="command-demo">
+                                <p><strong>操作示範：</strong></p>
+                                <img 
+                                src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+                                alt="操作示範 GIF" 
+                                class="demo-gif" 
+                                width="700" 
+                                height="400">
+                
+                            </div> 
+                            <h3>/選手管理-匯入選手名單</h3>
+                            <p>
+                                <strong>使用介紹：</strong> 利用Excel匯入選手名單。
+                            </p>
+                            <p>
+                                <strong>用法：</strong> <code>/選手管理-匯入選手名單 {匯入excel檔案}</code>
+                            </p>
+                            <p>
+                                <strong>使用權限：</strong> 有管理員身分組。
+                            </p>
+                            <!-- 新增 GIF 示範 -->
+                            <div class="command-demo">
+                                <p><strong>操作示範：</strong></p>
+                                <img 
+                                src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+                                alt="操作示範 GIF" 
+                                class="demo-gif" 
+                                width="700" 
+                                height="400">
+                            </div>    
+                        <h3>/選手管理-生成選手名單Excel範本 </h3>
+                        <p>
+                            <strong>使用介紹：</strong> 提供給使用者範本，可將選手所有名字複製到此excrl
+                        </p>
+                        <p>
+                            <strong>用法：</strong> <code>/選手管理-生成選手名單Excel範本 輸出後 成功匯入選手名單，並保留現有分數。</code>
+                        </p>
+                        <p>
+                            <strong>使用權限：</strong> 有管理員身分組。
+                        </p>
+                        <!-- 新增 GIF 示範 -->
+                        <div class="command-demo">
+                            <p><strong>操作示範：</strong></p>
+                            <img 
+                            src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+                            alt="操作示範 GIF" 
+                            class="demo-gif" 
+                            width="700" 
+                            height="400">
+                        </div>
+                    <h3>/選手管理-加入比賽 </h3>
+                    <p>
+                        <strong>使用介紹：</strong> 直接使用Discord的使用者名稱參賽。
+                    </p>
+                    <p>
+                        <strong>用法：</strong> <code>/選手管理-加入比賽 輸出後會請你選擇參加哪一場比賽，選擇後好會 出現{使用者名稱} 已成功加入比賽 '123'！</code>
+                    </p>
+                    <p>
+                        <strong>使用權限：</strong> 有管理員與選手身分組。
+                    </p>
+                    <!-- 新增 GIF 示範 -->
+                    <div class="command-demo">
+                        <p><strong>操作示範：</strong></p>
+                        <img 
+                        src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+                        alt="操作示範 GIF" 
+                        class="demo-gif" 
+                        width="700" 
+                        height="400">
+                    </div>       
+                    <h3>/選手管理-移除選手 </h3>
+                    <p>
+                        <strong>使用介紹：</strong> 輸入選手名稱即可在名單中刪除
+                    </p>
+                    <p>
+                        <strong>用法：</strong> <code>/選手管理-移除選手 {選手名稱} 輸出後會出現選手 '{選手名稱}' 已成功從比賽中移除。<br>如果輸入選手名稱沒有在名單內則會顯示選手 '{選手名稱}' 不在參賽名單中。</code>
+                    </p>
+                    <p>
+                        <strong>使用權限：</strong> 有管理員身分組。
+                    </p>
+                    <!-- 新增 GIF 示範 -->
+                    <div class="command-demo">
+                        <p><strong>操作示範：</strong></p>
+                        <img 
+                        src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+                        alt="操作示範 GIF" 
+                        class="demo-gif" 
+                        width="700" 
+                        height="400">
+                    </div>      
+                    <h3>/選手管理-查看選手名單</h3>
+                    <p>
+                        <strong>使用介紹：</strong> 查看該比賽所有人的名稱。。
+                    </p>
+                    <p>
+                        <strong>用法：</strong> <code>/選手管理-查看選手名單 輸出後顯示所有參賽者名稱</code>
+                    </p>
+                    <p>
+                        <strong>使用權限：</strong> 有管理員與選手身分組。
+                    </p>
+                    <!-- 新增 GIF 示範 -->
+                    <div class="command-demo">
+                        <p><strong>操作示範：</strong></p>
+                        <img 
+                        src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+                        alt="操作示範 GIF" 
+                        class="demo-gif" 
+                        width="700" 
+                        height="400">
+                    </div> 
+                    </div>                                  
+                    <div class="command-block yellow-bg">
+                        <h1>比賽樹狀圖指令</h1>
+                        <h3>/比賽樹狀圖-生成單敗淘汰賽的樹狀圖</h3>
+                        <p>
+                            <strong>使用介紹：</strong> 生成單敗淘汰賽的樹狀圖。。
+                        </p>
+                        <p>
+                            <strong>用法：</strong> <code>/比賽樹狀圖-生成單敗淘汰賽的樹狀圖 {輸入幾輪2/4/8/16/32} {輸入選手名稱 每位選手用,隔開}</code>
+                        </p>
+                        <p>
+                            <strong>使用權限：</strong> 有管理員身分組。
+                        </p>
+                        <!-- 新增 GIF 示範 -->
+                        <div class="command-demo">
+                            <p><strong>操作示範：</strong></p>
+                            <img 
+                            src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+                            alt="操作示範 GIF" 
+                            class="demo-gif" 
+                            width="700" 
+                            height="400">
+            
+                        </div> 
+                        <h3>/比賽樹狀圖-更新單敗淘汰獲勝者</h3>
+                        <p>
+                            <strong>使用介紹：</strong>輸入獲勝者，圖片中選手就會更新。
+                        </p>
+                        <p>
+                            <strong>用法：</strong> <code>/比賽樹狀圖-更新單敗淘汰獲勝者 {輸入獲勝者名稱} {}</code>
+                        </p>
+                        <p>
+                            <strong>使用權限：</strong> 有管理員身分組。
+                        </p>
+                        <!-- 新增 GIF 示範 -->
+                        <div class="command-demo">
+                            <p><strong>操作示範：</strong></p>
+                            <img 
+                            src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+                            alt="操作示範 GIF" 
+                            class="demo-gif" 
+                            width="700" 
+                            height="400">
+                        </div>    
+                    <h3>/比賽樹狀圖-查看比賽樹狀圖</h3>
+                    <p>
+                        <strong>使用介紹：</strong>查看目前比賽的樹狀圖圖片
+                    </p>
+                    <p>
+                        <strong>用法：</strong> <code>/比賽樹狀圖-查看比賽樹狀圖 輸出後就會出現該比賽的樹狀圖圖片了</code>
+                    </p>
+                    <p>
+                        <strong>使用權限：</strong> 有管理員和選手身分組。
+                    </p>
+                    <!-- 新增 GIF 示範 -->
+                    <div class="command-demo">
+                        <p><strong>操作示範：</strong></p>
+                        <img 
+                        src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+                        alt="操作示範 GIF" 
+                        class="demo-gif" 
+                        width="700" 
+                        height="400">
+                    </div>
+                </div>
+        <div class="command-block green-bg">
+            <h1>瑞士倫無淘汰指令</h1>
+            <h3>/瑞士制無淘汰-設置比賽參數</h3>
+            <p>
+                <strong>使用介紹：</strong> 設置瑞士倫無淘汰的倫數與人數限制
+            </p>
+            <p>
+                <strong>用法：</strong> <code>/瑞士制無淘汰-設置比賽參數 {倫數} {人數}</code>
+            </p>
+            <p>
+                <strong>使用權限：</strong> 有管理員身分組。
+            </p>
+            <!-- 新增 GIF 示範 -->
+            <div class="command-demo">
+                <p><strong>操作示範：</strong></p>
+                <img 
+                src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+                alt="操作示範 GIF" 
+                class="demo-gif" 
+                width="700" 
+                height="400">
+
+            <h3>/瑞士制無淘汰-開始第一輪比賽</h3>
+            <p>
+                <strong>使用介紹：</strong> 已確定參賽選手人數已滿後，執行指令開始分配第一輪的對戰組合
+            </p>
+            <p>
+                <strong>用法：</strong> <code>/瑞士制無淘汰-開始第一輪比賽 輸出後出現名單內有的選手隨機配對</code>
+            </p>
+            <p>
+                <strong>使用權限：</strong> 有管理員身分組。
+            </p>
+            <!-- 新增 GIF 示範 -->
+            <div class="command-demo">
+                <p><strong>操作示範：</strong></p>
+                <img 
+                src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+                alt="操作示範 GIF" 
+                class="demo-gif" 
+                width="700" 
+                height="400"> 
+        </div> 
+    </div> 
+    <h3>/瑞士制無淘汰-更新比分</h3>
+    <p>
+        <strong>使用介紹：</strong> 選手比完後可輸入此指令登記分數。
+    </p>
+    <p>
+        <strong>用法：</strong> <code>/瑞士制無淘汰-更新比分 {選手名稱} {輸入分數}</code>
+    </p>
+    <p>
+        <strong>使用權限：</strong> 有管理員身分組。
+    </p>
+    <!-- 新增 GIF 示範 -->
+    <div class="command-demo">
+        <p><strong>操作示範：</strong></p>
+        <img 
+        src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+        alt="操作示範 GIF" 
+        class="demo-gif" 
+        width="700" 
+        height="400">
+    </div>
+        <h3>/瑞士制無淘汰-下一輪 </h3>
+        <p>
+            <strong>使用介紹：</strong> 此指令會根據第一輪的分數進行下一輪的分配對手組合。。
+        </p>
+        <p>
+            <strong>用法：</strong> <code>/瑞士制無淘汰-下一輪 輸出後會出現 開始第{目前的倫數}輪比賽 然後按照相同分數進行匹配。</br>如果有設定倫數，會在最後一輪提示</code>
+        </p>
+        <p>
+            <strong>使用權限：</strong> 有管理員身分組。
+        </p>
+        <!-- 新增 GIF 示範 -->
+        <div class="command-demo">
+            <p><strong>操作示範：</strong></p>
+            <img 
+            src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+            alt="操作示範 GIF" 
+            class="demo-gif" 
+            width="700" 
+            height="400">
+
+    </div> 
+    <h3>/瑞士制無淘汰-查看分數 </h3>
+    <p>
+        <strong>使用介紹：</strong> 查看目前所有人的分數。
+    </p>
+    <p>
+        <strong>用法：</strong> <code>/瑞士制無淘汰-查看分數 輸出後顯示所有人的分數。</code>
+    </p>
+    <p>
+        <strong>使用權限：</strong> 有管理員與選手身分組。
+    </p>
+    <!-- 新增 GIF 示範 -->
+    <div class="command-demo">
+        <p><strong>操作示範：</strong></p>
+        <img 
+        src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+        alt="操作示範 GIF" 
+        class="demo-gif" 
+        width="700" 
+        height="400">
+    </div>
+
+</div>
+                            <div class="command-block purple-bg">
+                            <h1>提醒與公告指令</h1>
+                            <h3>/提醒與公告-比賽公告</h3>
+                            <p>
+                                <strong>使用介紹：</strong> 讓選手可以查看比賽的資訊。
+                            <p>
+                                <strong>用法：</strong> <code>/提醒與公告-比賽公告 輸出後會顯示該比賽的資訊。</code>
+                            </p>
+                            <p>
+                                <strong>使用權限：</strong> 有管理員和選手身分組。
+                            </p>
+                            <!-- 新增 GIF 示範 -->
+                            <div class="command-demo">
+                                <p><strong>操作示範：</strong></p>
+                                <img 
+                                src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+                                alt="操作示範 GIF" 
+                                class="demo-gif" 
+                                width="700" 
+                                height="400">
+
+                                <h3>/提醒與公告-設置提醒</h3>
+                                <p>
+                                    <strong>使用介紹：</strong>設置時間和選手的Discord名稱，時間到後會提醒選手該比賽並且會標註選手Discord的名稱。
+                                </p>
+                                <p>
+                                    <strong>用法：</strong> <code>提醒與公告-設置提醒 {輸入24小時制的時}{分}{選手Discord名稱}</code>
+                                </p>
+                                <p>
+                                    <strong>使用權限：</strong> 有管理員身分組。
+                                </p>
+                                <!-- 新增 GIF 示範 -->
+                                <div class="command-demo">
+                                    <p><strong>操作示範：</strong></p>
+                                    <img 
+                                    src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+                                    alt="操作示範 GIF" 
+                                    class="demo-gif" 
+                                    width="700" 
+                                    height="400">
+                                </div>
+                                </div>
+                                </div>
+                                    <div class="command-block grey-bg">
+                                        <h1>指令查詢</h1>
+                                        <h3>/指令查詢</h3>
+                                        <p>
+                                            <strong>使用介紹：</strong>依照自己的身分組顯示可以使用的指令。
+                                        </p>
+                                        <p>
+                                            <strong>用法：</strong> <code>/指令查詢 輸出後會依照自己的身分組顯示可以使用的指令。</code>
+                                        </p>
+                                        <p>
+                                            <strong>使用權限：</strong> 有管理員和選手身分組。
+                                        </p>
+                                        <!-- 新增 GIF 示範 -->
+                                        <div class="command-demo">
+                                            <p><strong>操作示範：</strong></p>
+                                            <img 
+                                            src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
+                                            alt="操作示範 GIF" 
+                                            class="demo-gif" 
+                                            width="700" 
+                                            height="400">
+                                 </div>
+    </section>
+
+    <section id="contact">
+        <h2>聯絡我們</h2>
+        <p>如果有任何建議或者問題，歡迎聯絡我們：</p>
+        <p>Email: <a href="mailto:bear104008@gmail.com">bear104008@gmail.com</a></p>
+        <a href="https://discord.com/oauth2/authorize?client_id=1307758563778887700&permissions=0&integration_type=0&scope=bot" class="cta-button">邀請比賽小幫手加入伺服器</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 崑山科技大學 資工系 專題作品</p>
+    </footer>
+</body>
+</html>
+
