@@ -5,643 +5,566 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>比賽小幫手</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         body {
             font-family: 'Noto Sans', sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: #f4f7fc;
             color: #333;
         }
-        header {
-            background-color: #4a90e2;
-            color: white;
-            padding: 1rem 2rem;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-        }
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: #357abd;
-            padding: 0.5rem;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 1rem;
-            font-weight: bold;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        section {
-            padding: 2rem;
-            max-width: 900px;
+
+        .carousel-container {
+            max-width: 50%;
             margin: auto;
-        }
-        .cta-button {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 0.5rem 1rem;
-            background-color: #4a90e2;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .cta-button:hover {
-            background-color: #357abd;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            margin-top: 2rem;
-        }
-/* 指令主要父容器，控制整體排版 */
-.command-section {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    max-width: 800px; /* 限制內容最大寬度 */
-    margin: 0 auto; /* 水平置中 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 輕微陰影效果 */
-}
-
-/* 確保每個區塊間有清晰的間距 */
-.command {
-    margin-bottom: 30px; /* 垂直間距，與下一個區塊分開 */
-    padding: 20px;
-    background-color: #e6f7ff;
-    border: 1px solid #b3d9ff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 增加層次感 */
-}
-
-/* 優化每段文字的行距和結構 */
-.command p {
-    margin: 10px 0; /* 更加適當的段落間距 */
-    line-height: 1.6; /* 行距增加，可讀性更好 */
-}
-
-/* 圖片或 GIF 的樣式保持不變 */
-.demo-gif {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    display: block;
-    max-width: 100%; /* 確保圖片不會超出區塊 */
-    height: auto;
-    margin: 10px auto;
-}
-
-/* 指令介紹區域的主容器樣式 */
-.command-section {
-            padding: 20px; /* 四周內部留白 */
-            background-color: #f9f9f9; /* 背景顏色：淡灰色 */
-            border-radius: 10px; /* 邊角圓滑 */
-            max-width: 800px; /* 最大寬度 */
-            margin: 0 auto; /* 水平置中 */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加輕微陰影，增強層次感 */
+            margin-bottom: 2rem;
         }
 
-        /* 每個指令區塊的基礎樣式 */
-        .command-block {
-            margin-bottom: 30px; /* 區塊間距，讓每段內容分開 */
-            padding: 20px; /* 內部留白 */
-            border-radius: 8px; /* 邊角圓滑 */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加陰影效果，增加立體感 */
-            color: rgb(0, 0, 0); /* 預設文字顏色為白色 */
+        .carousel img {
+            object-fit: cover;
+            width: 100%;
+            height: auto;
         }
 
-        /* 各指令區塊的背景顏色 */
-        .blue-bg { background-color: #b3d9ff; } /* 比賽管理指令：藍色背景 */
-        .red-bg { background-color: #ee7b9a; } /* 選手管理指令：紅色背景 */
-        .yellow-bg { background-color: #f5bf69; } /* 比賽樹狀圖指令：黃色背景 */
-        .green-bg { background-color: #ade96d; } /* 瑞士倫無淘汰：綠色背景 */
-        .purple-bg { background-color: #bf83f0; }/* 提醒與公告指令：紫色背景 */
-        .grey-bg { background-color: #abafa7; }/* 指令查詢：綠色背景 */
-        /* 列表樣式：移除預設的樣式 */
-        .command-block ul {
-            margin: 0; /* 去除列表的外邊距 */
-            padding: 0; /* 去除列表的內邊距 */
-            list-style-type: none; /* 去除預設的項目符號 */
+        .section-selector {
+            margin-bottom: 2rem;
         }
 
-        /* 列表項目樣式 */
-        .command-block ul li {
-            margin-bottom: 10px; /* 每個項目間距 */
+        .commands-list {
+            display: none;
         }
 
+        .commands-list.active {
+            display: block;
+        }
 
+        .demo-video {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 10px auto;
+        }
+        
     </style>
 </head>
 <body>
-    <header>
+    <header class="bg-primary text-white text-center py-3">
         <h1>比賽小幫手</h1>
         <p>專為電競比賽設計的 Discord 小工具</p>
     </header>
 
-    <nav>
-        <a href="#intro">專題介紹</a>
-        <a href="#features">功能展示</a>
-        <a href="#commands">指令介紹</a>
-        <a href="#contact">聯絡我們</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">比賽小幫手</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#intro">專題介紹</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">功能簡介</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#commands">指令介紹</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">聯絡我們</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
 
-    <section id="intro">
-        <h2>專題介紹</h2>
-        <p>大家好！我們是崑山科技大學資工系的學生，今天很高興向大家介紹我們的專題作品——「比賽小幫手」。這是一款專為電競比賽設計的小工具，旨在幫助比賽主辦者更有效率的管理賽事流程。</p>
-        <p>我們觀察到許多線上比賽的賽事通知和溝通平台多以 Discord 為主。因此，我們的專題開發了一款名為「比賽小幫手」的 Discord 聊天室機器人，透過這個機器人，主辦方能夠簡化比賽的管理操作，讓賽事更有條理、更順暢。</p>
-        <p>比賽小幫手主要具備以下功能：</p>
-        <ul>
-            <li>單敗淘汰賽樹狀圖生成：機器人能自動繪製單敗淘汰賽的樹狀圖，清晰呈現比賽進程。</li>
-            <li>分數統計與管理：比賽小幫手支援兩種計分模式：</li>
-            <ul>
-                <li>一般模式：適用於 1v1 賽制，選手間一對一比賽，勝者獲得一分。此模式常用於搶幾分（bo）的比賽，選手達到指定分數即可結束比賽。</li>
-                <li>瑞士倫賽制（無淘汰）：此模式適合遊戲王、爐石戰記、寶可夢等卡牌遊戲比賽。第一輪隨機匹配，之後的輪次會根據選手分數相近來進行匹配，最終選手可以透過指令查看排名或晉級結果。</li>
-                <li>瑞士倫賽制（淘汰）：此模式適合英雄聯盟、傳說對決相關的 MOBA 類遊戲。規則與無淘汰版類似，但會計算敗分，達到指定的淘汰分數就會被淘汰，而達到指定獲勝分數就可以晉級。</li>
-            </ul>
-        </ul>
-        <a href="#features" class="cta-button">查看更多功能</a>
-    </section>
-
-    <section id="features">
-        <h2>功能簡介</h2>
-        <ul>
-            <li>單敗淘汰賽樹狀圖生成</li>
-            <li>分數統計與管理</li>
-            <li>瑞士倫賽制：無淘汰模式與淘汰模式</li>
-            <li>比賽提醒與公告功能</li>
-        </ul>
-    </section>
-
-    <section id="commands" class="command-section">
-        <h2>指令介紹</h2>
-        <div class="command-block blue-bg">
-            <h1>比賽管理指令</h1>
-            <h3>/比賽管理-創建比賽</h3>
-            <p>
-                <strong>使用介紹：</strong> 輸入比賽名稱創建一個比賽資料夾。
-            </p>
-            <p>
-                <strong>用法：</strong> <code>/比賽管理-創建比賽 {比賽名稱} 輸出後顯示 比賽 "測試" 已成功創建！</code>
-            </p>
-            <p>
-                <strong>使用權限：</strong> 有管理員身分組。
-            </p>
-            <!-- 新增 GIF 示範 -->
-            <div class="command-demo">
-                <p><strong>操作示範：</strong></p>
-                <img 
-                src="https://github.com/mabaru/mayuan.github.io/blob/main/%E6%AF%94%E8%B3%BD%E5%B0%8F%E5%B9%AB%E6%89%8B%E7%B6%B2%E7%AB%99/%E6%AF%94%E8%B3%BD%E5%89%B5%E5%BB%BA.gif?raw=true" 
-                alt="操作示範 GIF" 
-                class="demo-gif" 
-                width="700" 
-                height="400">
-
+    <section id="carousel" class="mb-5">
+        <div class="carousel-container">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <a href="https://youtu.be/dQw4w9WgXcQ?si=8UslE3soZbq-Y04Y" target="_blank">
+                            <img src="C:\Users\n0486\Desktop\專題 比賽小幫手\比賽小幫手網站\比賽小幫手網站歡迎圖片.png" class="d-block w-100" alt="Slide 1">
+                        </a>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="https://discord.com/oauth2/authorize?client_id=1321339515058651166" target="_blank">
+                            <img src="C:\Users\n0486\Desktop\專題 比賽小幫手\比賽小幫手網站\比賽小幫手邀請圖片.png" class="d-block w-100" alt="Slide 2">
+                        </a>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="https://www.youtube.com/watch?v=example3" target="_blank">
+                            <img src="https://via.placeholder.com/800x400" class="d-block w-100" alt="Slide 3">
+                        </a>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-                <h3>/比賽管理-比賽編輯模式選擇</h3>
-                <p>
-                    <strong>使用介紹：</strong> 選擇一個比賽資料夾進入編輯模式。
-                </p>
-                <p>
-                    <strong>用法：</strong> <code>/比賽管理-比賽編輯模式選擇 輸出後出現選項 選擇好後會出現已選擇比賽資料夾：測試 字樣</code>
-                </p>
-                <p>
-                    <strong>使用權限：</strong> 有管理員身分組。
-                </p>
-                <!-- 新增 GIF 示範 -->
-                <div class="command-demo">
-                    <p><strong>操作示範：</strong></p>
-                    <img 
-                    src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-                    alt="操作示範 GIF" 
-                    class="demo-gif" 
-                    width="700" 
-                    height="400">
-    
-                </div>
-                    <h3>/比賽管理-退出比賽編輯模式</h3>
-                    <p>
-                        <strong>使用介紹：</strong> 退出選擇的比賽資料夾。
-                    </p>
-                    <p>
-                        <strong>用法：</strong> <code>/比賽管理-退出比賽編輯模式 輸出後會顯示 已退出比賽編輯模式。 字樣</code>
-                    </p>
-                    <p>
-                        <strong>使用權限：</strong> 有管理員身分組。
-                    </p>
-                    <!-- 新增 GIF 示範 -->
-                    <div class="command-demo">
-                        <p><strong>操作示範：</strong></p>
-                        <img 
-                        src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-                        alt="操作示範 GIF" 
-                        class="demo-gif" 
-                        width="700" 
-                        height="400">
+        </div>
+    </section>
+
+    <div class="container my-5">
+        <section id="intro" class="mb-5">
+            <h2 class="text-center">專題介紹</h2>
+            <p>大家好！我們是崑山科技大學資工系的學生，今天很高興向大家介紹我們的專題作品——「比賽小幫手」。這是一款專為電競比賽設計的小工具，旨在幫助比賽主辦者更有效率的管理賽事流程。</p>
+            <section id="features" class="mb-5">
+                <h2 class="text-center">功能簡介</h2>
+            <ul class="list-group">
+                <li class="list-group-item">可以方便管理選手</li>
+                <li class="list-group-item">可以快速生成比賽樹狀圖</li>
+                <li class="list-group-item">可以使用瑞士倫賽制：無淘汰模式</li>
+                <li class="list-group-item">未來會新增更多的比賽模式</li>
+            </ul>
+        </section>
+
         
+
+        <section id="commands" class="mb-5">
+            <h2 class="text-center">指令介紹</h2>
+
+            <div class="section-selector text-center">
+                <button class="btn btn-secondary mx-1" data-section="management">比賽管理指令 (4)</button>
+                <button class="btn btn-secondary mx-1" data-section="players">選手管理指令 (5)</button>
+                <button class="btn btn-secondary mx-1" data-section="tree">比賽樹狀圖指令 (3)</button>
+                <button class="btn btn-secondary mx-1" data-section="swiss">瑞士倫無淘汰指令 (5)</button>
+                <button class="btn btn-secondary mx-1" data-section="reminders">提醒與公告指令 (2)</button>
+                <button class="btn btn-secondary mx-1" data-section="query">指令查詢 (1)</button>
+                <button class="btn btn-secondary mx-1" data-section="ai">AI 管理員指令 </button>
+                <button class="btn btn-secondary mx-1" data-section="pending">待新增的指令列表</button>
+            </div>
+
+            <div id="management" class="commands-list">
+                <h3>比賽管理指令</h3>
+                <div class="accordion" id="managementAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading1">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1">
+                                創建比賽
+                            </button>
+                        </h2>
+                        <div id="collapse-1" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#managementAccordion">
+                            <div class="accordion-body">
+                                <p><strong>使用介紹：</strong> 輸入比賽名稱創建一個比賽資料夾。</p>
+                                <p><strong>用法：</strong> <code>輸入/比賽管理-創建比賽 {比賽名稱} 輸出後會出現伺服器 {伺服器ID} 的比賽 "{比賽名稱}" 已成功創建！ </br>當輸入此伺服器有的比賽名稱後會顯示比賽 "{比賽名稱}" 已經存在於伺服器 {伺服器ID}，請選擇另一個名稱。</code></p>
+                                <p><strong>使用權限：</strong> 有管理員身份組。</p>
+                                <p><strong>影片示範：</strong></p>
+                                <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video></p>
+                                </video>
+                            </div>
+                        </div>
                     </div>
-                        <h3>/比賽管理-刪除目前資料夾</h3>
-                        <p>
-                            <strong>使用介紹：</strong> 移除比賽資料夾。
-                        </p>
-                        <p>
-                            <strong>用法：</strong> <code>/比賽管理-刪除目前資料夾 輸出後回有一個防呆機制，可以選擇刪除或取消按下刪除。<br>按下刪除會出現比賽資料夾 '測試' 已成功刪除。字樣<br>取消則是 操作已取消。字樣</code>
-                        </p>
-                        <p>
-                            <strong>使用權限：</strong> 有管理員身分組。
-                        </p>
-                        <!-- 新增 GIF 示範 -->
-                        <div class="command-demo">
-                            <p><strong>操作示範：</strong></p>
-                            <img 
-                            src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-                            alt="操作示範 GIF" 
-                            class="demo-gif" 
-                            width="700" 
-                            height="400">
-            
+                    <!-- 新增範本指令 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
+                                比賽選擇編輯模式
+                            </button>
+                        </h2>
+                        <div id="collapse-2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#managementAccordion">
+                            <div class="accordion-body">
+                                <p><strong>使用介紹：</strong> 選擇一個比賽資料夾</p>
+                                <p><strong>用法：</strong> <code>輸入/比賽管理-比賽編輯模式選擇 輸出後顯示下拉式選單 選擇一個比賽名稱顯示已選擇比賽資料夾：{選擇的比賽名稱選擇的比賽名稱}。<br>如果此伺服器沒有創建過比賽的資料夾則會顯示 目前伺服器中沒有可用的比賽資料夾。</code></p>
+                                <p><strong>使用權限：</strong> 有管理員身份組。</p>
+                                <p><strong>影片示範：</strong></p>
+                                <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video>
+                                </video>
+                            </div>
                         </div>
-
+                    </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
+                            退出比賽編輯模式
+                        </button>
+                    </h2>
+                    <div id="collapse-3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#managementAccordion">
+                        <div class="accordion-body">
+                            <p><strong>使用介紹：</strong> 退出比賽編輯模式，如果要更換其他資料夾請先退出編輯模式在選擇</p>
+                            <p><strong>用法：</strong> <code>輸入/比賽管理-退出比賽編輯模式 輸出後 顯示已退出比賽編輯模式。</code></p>
+                            <p><strong>使用權限：</strong> 有管理員身份組。</p>
+                            <p><strong>影片示範：</strong></p>
+                            <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video>
+                            </video>
                         </div>
-
-                        <div class="command-block red-bg">
-                            <h1>選手管理指令</h1>
-                            <h3>/選手管理-添加選手</h3>
-                            <p>
-                                <strong>使用介紹：</strong> 輸入參賽名字後，即可報名比賽。
-                            </p>
-                            <p>
-                                <strong>用法：</strong> <code>/選手管理-添加選手 {選手名稱} 輸出後顯示 選手 '{選手名稱}' 已成功添加到比賽中。</code>
-                            </p>
-                            <p>
-                                <strong>使用權限：</strong> 有管理員和選手身分組。
-                            </p>
-                            <!-- 新增 GIF 示範 -->
-                            <div class="command-demo">
-                                <p><strong>操作示範：</strong></p>
-                                <img 
-                                src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-                                alt="操作示範 GIF" 
-                                class="demo-gif" 
-                                width="700" 
-                                height="400">
-                
-                            </div> 
-                            <h3>/選手管理-匯入選手名單</h3>
-                            <p>
-                                <strong>使用介紹：</strong> 利用Excel匯入選手名單。
-                            </p>
-                            <p>
-                                <strong>用法：</strong> <code>/選手管理-匯入選手名單 {匯入excel檔案}</code>
-                            </p>
-                            <p>
-                                <strong>使用權限：</strong> 有管理員身分組。
-                            </p>
-                            <!-- 新增 GIF 示範 -->
-                            <div class="command-demo">
-                                <p><strong>操作示範：</strong></p>
-                                <img 
-                                src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-                                alt="操作示範 GIF" 
-                                class="demo-gif" 
-                                width="700" 
-                                height="400">
-                            </div>    
-                        <h3>/選手管理-生成選手名單Excel範本 </h3>
-                        <p>
-                            <strong>使用介紹：</strong> 提供給使用者範本，可將選手所有名字複製到此excrl
-                        </p>
-                        <p>
-                            <strong>用法：</strong> <code>/選手管理-生成選手名單Excel範本 輸出後 成功匯入選手名單，並保留現有分數。</code>
-                        </p>
-                        <p>
-                            <strong>使用權限：</strong> 有管理員身分組。
-                        </p>
-                        <!-- 新增 GIF 示範 -->
-                        <div class="command-demo">
-                            <p><strong>操作示範：</strong></p>
-                            <img 
-                            src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-                            alt="操作示範 GIF" 
-                            class="demo-gif" 
-                            width="700" 
-                            height="400">
-                        </div>
-                    <h3>/選手管理-加入比賽 </h3>
-                    <p>
-                        <strong>使用介紹：</strong> 直接使用Discord的使用者名稱參賽。
-                    </p>
-                    <p>
-                        <strong>用法：</strong> <code>/選手管理-加入比賽 輸出後會請你選擇參加哪一場比賽，選擇後好會 出現{使用者名稱} 已成功加入比賽 '123'！</code>
-                    </p>
-                    <p>
-                        <strong>使用權限：</strong> 有管理員與選手身分組。
-                    </p>
-                    <!-- 新增 GIF 示範 -->
-                    <div class="command-demo">
-                        <p><strong>操作示範：</strong></p>
-                        <img 
-                        src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-                        alt="操作示範 GIF" 
-                        class="demo-gif" 
-                        width="700" 
-                        height="400">
-                    </div>       
-                    <h3>/選手管理-移除選手 </h3>
-                    <p>
-                        <strong>使用介紹：</strong> 輸入選手名稱即可在名單中刪除
-                    </p>
-                    <p>
-                        <strong>用法：</strong> <code>/選手管理-移除選手 {選手名稱} 輸出後會出現選手 '{選手名稱}' 已成功從比賽中移除。<br>如果輸入選手名稱沒有在名單內則會顯示選手 '{選手名稱}' 不在參賽名單中。</code>
-                    </p>
-                    <p>
-                        <strong>使用權限：</strong> 有管理員身分組。
-                    </p>
-                    <!-- 新增 GIF 示範 -->
-                    <div class="command-demo">
-                        <p><strong>操作示範：</strong></p>
-                        <img 
-                        src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-                        alt="操作示範 GIF" 
-                        class="demo-gif" 
-                        width="700" 
-                        height="400">
-                    </div>      
-                    <h3>/選手管理-查看選手名單</h3>
-                    <p>
-                        <strong>使用介紹：</strong> 查看該比賽所有人的名稱。。
-                    </p>
-                    <p>
-                        <strong>用法：</strong> <code>/選手管理-查看選手名單 輸出後顯示所有參賽者名稱</code>
-                    </p>
-                    <p>
-                        <strong>使用權限：</strong> 有管理員與選手身分組。
-                    </p>
-                    <!-- 新增 GIF 示範 -->
-                    <div class="command-demo">
-                        <p><strong>操作示範：</strong></p>
-                        <img 
-                        src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-                        alt="操作示範 GIF" 
-                        class="demo-gif" 
-                        width="700" 
-                        height="400">
-                    </div> 
-                    </div>                                  
-                    <div class="command-block yellow-bg">
-                        <h1>比賽樹狀圖指令</h1>
-                        <h3>/比賽樹狀圖-生成單敗淘汰賽的樹狀圖</h3>
-                        <p>
-                            <strong>使用介紹：</strong> 生成單敗淘汰賽的樹狀圖。。
-                        </p>
-                        <p>
-                            <strong>用法：</strong> <code>/比賽樹狀圖-生成單敗淘汰賽的樹狀圖 {輸入幾輪2/4/8/16/32} {輸入選手名稱 每位選手用,隔開}</code>
-                        </p>
-                        <p>
-                            <strong>使用權限：</strong> 有管理員身分組。
-                        </p>
-                        <!-- 新增 GIF 示範 -->
-                        <div class="command-demo">
-                            <p><strong>操作示範：</strong></p>
-                            <img 
-                            src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-                            alt="操作示範 GIF" 
-                            class="demo-gif" 
-                            width="700" 
-                            height="400">
-            
-                        </div> 
-                        <h3>/比賽樹狀圖-更新單敗淘汰獲勝者</h3>
-                        <p>
-                            <strong>使用介紹：</strong>輸入獲勝者，圖片中選手就會更新。
-                        </p>
-                        <p>
-                            <strong>用法：</strong> <code>/比賽樹狀圖-更新單敗淘汰獲勝者 {輸入獲勝者名稱} {}</code>
-                        </p>
-                        <p>
-                            <strong>使用權限：</strong> 有管理員身分組。
-                        </p>
-                        <!-- 新增 GIF 示範 -->
-                        <div class="command-demo">
-                            <p><strong>操作示範：</strong></p>
-                            <img 
-                            src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-                            alt="操作示範 GIF" 
-                            class="demo-gif" 
-                            width="700" 
-                            height="400">
-                        </div>    
-                    <h3>/比賽樹狀圖-查看比賽樹狀圖</h3>
-                    <p>
-                        <strong>使用介紹：</strong>查看目前比賽的樹狀圖圖片
-                    </p>
-                    <p>
-                        <strong>用法：</strong> <code>/比賽樹狀圖-查看比賽樹狀圖 輸出後就會出現該比賽的樹狀圖圖片了</code>
-                    </p>
-                    <p>
-                        <strong>使用權限：</strong> 有管理員和選手身分組。
-                    </p>
-                    <!-- 新增 GIF 示範 -->
-                    <div class="command-demo">
-                        <p><strong>操作示範：</strong></p>
-                        <img 
-                        src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-                        alt="操作示範 GIF" 
-                        class="demo-gif" 
-                        width="700" 
-                        height="400">
                     </div>
                 </div>
-        <div class="command-block green-bg">
-            <h1>瑞士倫無淘汰指令</h1>
-            <h3>/瑞士制無淘汰-設置比賽參數</h3>
-            <p>
-                <strong>使用介紹：</strong> 設置瑞士倫無淘汰的倫數與人數限制
-            </p>
-            <p>
-                <strong>用法：</strong> <code>/瑞士制無淘汰-設置比賽參數 {倫數} {人數}</code>
-            </p>
-            <p>
-                <strong>使用權限：</strong> 有管理員身分組。
-            </p>
-            <!-- 新增 GIF 示範 -->
-            <div class="command-demo">
-                <p><strong>操作示範：</strong></p>
-                <img 
-                src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-                alt="操作示範 GIF" 
-                class="demo-gif" 
-                width="700" 
-                height="400">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading4">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-4" aria-expanded="false" aria-controls="collapse-4">
+                            刪除目前資料夾
+                        </button>
+                    </h2>
+                    <div id="collapse-4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#managementAccordion">
+                        <div class="accordion-body">
+                            <p><strong>使用介紹：</strong> 刪除目前所選的比賽資料夾</p>
+                            <p><strong>用法：</strong> <code>輸入/比賽管理-刪除目前資料夾 輸出後顯示 你確定要刪除比賽資料夾 '{比賽名稱}' 嗎？此操作無法撤銷！並有確認刪除雨取消的按鈕選項。<br>選擇刪除出現 比賽資料夾 '{比賽名稱}' 已成功刪除。<br>選擇取消顯示 操作已取消。<br>當沒有選擇比賽資料夾則會提示 請先進入比賽編輯模式，選擇要刪除的比賽資料夾。</code></p>
+                            <p><strong>使用權限：</strong> 有管理員身份組。</p>
+                            <p><strong>影片示範：</strong></p>
+                            <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video>
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
 
-            <h3>/瑞士制無淘汰-開始第一輪比賽</h3>
-            <p>
-                <strong>使用介紹：</strong> 已確定參賽選手人數已滿後，執行指令開始分配第一輪的對戰組合
-            </p>
-            <p>
-                <strong>用法：</strong> <code>/瑞士制無淘汰-開始第一輪比賽 輸出後出現名單內有的選手隨機配對</code>
-            </p>
-            <p>
-                <strong>使用權限：</strong> 有管理員身分組。
-            </p>
-            <!-- 新增 GIF 示範 -->
-            <div class="command-demo">
-                <p><strong>操作示範：</strong></p>
-                <img 
-                src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-                alt="操作示範 GIF" 
-                class="demo-gif" 
-                width="700" 
-                height="400"> 
-        </div> 
-    </div> 
-    <h3>/瑞士制無淘汰-更新比分</h3>
-    <p>
-        <strong>使用介紹：</strong> 選手比完後可輸入此指令登記分數。
-    </p>
-    <p>
-        <strong>用法：</strong> <code>/瑞士制無淘汰-更新比分 {選手名稱} {輸入分數}</code>
-    </p>
-    <p>
-        <strong>使用權限：</strong> 有管理員身分組。
-    </p>
-    <!-- 新增 GIF 示範 -->
-    <div class="command-demo">
-        <p><strong>操作示範：</strong></p>
-        <img 
-        src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-        alt="操作示範 GIF" 
-        class="demo-gif" 
-        width="700" 
-        height="400">
+            <!-- 其他指令類型模板 -->
+            <div id="players" class="commands-list">
+                <h3>選手管理指令</h3>
+                <div class="accordion" id="playersAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading5">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-5" aria-expanded="false" aria-controls="collapse-5">
+                                添加選手
+                            </button>
+                        </h2>
+                        <div id="collapse-5" class="accordion-collapse collapse" aria-labelledby="heading5" data-bs-parent="#playersAccordion">
+                            <div class="accordion-body">
+                                <p><strong>使用介紹：</strong> 可以自己輸入選手名稱加入比賽</p>
+                                <p><strong>用法：</strong> <code>輸入/選手管理-添加選手 {輸入選手名稱} 輸出後顯示 選手 '{選手名稱}' 已成功添加到比賽中。</br>如果重複輸入則會提示 選手 '{選手名稱}' 已經在比賽中！</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</code></p>
+                                <p><strong>使用權限：</strong> 有管理員與選手身份組。</p>
+                                <p><strong>影片示範：</strong></p>
+                                <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video></p>
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading6">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-6" aria-expanded="false" aria-controls="collapse-6">
+                                匯入選手名單
+                            </button>
+                        </h2>
+                        <div id="collapse-6" class="accordion-collapse collapse" aria-labelledby="heading6" data-bs-parent="#playersAccordion">
+                            <div class="accordion-body">
+                                <p><strong>使用介紹：</strong> 利用excel檔案將選手名全部匯入。</p>
+                                <p><strong>用法：</strong> <code>輸入/選手管理-匯入選手名單 {放入Excel檔案}輸出後 顯示成功匯入選手名單，並保留現有分數。</br>當匯入檔案錯誤會出現 Excel 文件中缺少 '{選手名稱or分數}' 列。 </br>當未選擇比賽資料夾會提示 請先讓管理員選擇一個比賽資料夾進入編輯模式。</br>當用excel外的其他檔案匯入則會提示 匯入選手名單時發生錯誤：No such keys(s): 'io.excel.zip.reader'</code></p>
+                                <p><strong>使用權限：</strong> 有管理員身份組。</p>
+                                <p><strong>影片示範：</strong></p>
+                                <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video></p>
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading7">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-7" aria-expanded="false" aria-controls="collapse-7">
+                                生成excel檔案範本
+                            </button>
+                        </h2>
+                        <div id="collapse-7" class="accordion-collapse collapse" aria-labelledby="heading7" data-bs-parent="#playersAccordion">
+                            <div class="accordion-body">
+                                <p><strong>使用介紹：</strong> 給使用者一個範本，讓使用者只要複製選手名單貼到此檔案就可以匯入</p>
+                                <p><strong>用法：</strong> <code>輸入/選手管理-生成Excel檔案範本 輸出後顯示 以下是選手名單的 Excel 範本，請依照範本格式填寫選手資料並上傳:{Excel檔案} 點擊檔案即可下載。</code></p>
+                                <p><strong>使用權限：</strong> 有管理員身份組。</p>
+                                <p><strong>影片示範：</strong></p>
+                                <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video></p>
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading8">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-8" aria-expanded="false" aria-controls="collapse-8">
+                                加入比賽
+                            </button>
+                        </h2>
+                        <div id="collapse-8" class="accordion-collapse collapse" aria-labelledby="heading8" data-bs-parent="#playersAccordion">
+                            <div class="accordion-body">
+                                <p><strong>使用介紹：</strong> 使用Discord名稱報名比賽</p>
+                                <p><strong>用法：</strong> <code>輸入/選手管理-加入比賽 輸出後會請您選擇比賽資料夾 選擇好後會出現 {@Discord使用者名稱}已成功加入比賽'{比賽名稱}' </br>如果重複輸入則會提示 '{@Discord使用者名稱}' 已經在'{比賽名稱}'比賽中！</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</code></p>
+                                <p><strong>使用權限：</strong> 有管理員與選手身份組。</p>
+                                <p><strong>影片示範：</strong></p>
+                                <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video></p>
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading9">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-9" aria-expanded="false" aria-controls="collapse-9">
+                                移除選手
+                            </button>
+                        </h2>
+                        <div id="collapse-9" class="accordion-collapse collapse" aria-labelledby="heading9" data-bs-parent="#playersAccordion">
+                            <div class="accordion-body">
+                                <p><strong>使用介紹：</strong>輸入名單中的名字後即可移除</p>
+                                <p><strong>用法：</strong> <code>輸入/選手管理-移除選手 {選手名稱} 輸出後會出現 選手 '{選手名稱}' 已成功從比賽中移除。</br>如果輸入沒有在名單中的名稱會出現 選手 '{選手名稱}' 不在參賽名單中。</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</code></p>
+                                <p><strong>使用權限：</strong> 有管理員與選手身份組。</p>
+                                <p><strong>影片示範：</strong></p>
+                                <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video></p>
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            <div id="tree" class="commands-list">
+                <h3>比賽樹狀圖指令</h3>
+                <div class="accordion" id="treeAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading10">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-10" aria-expanded="false" aria-controls="collapse-10">
+                                生成單敗淘汰賽的樹狀圖
+                            </button>
+                        </h2>
+                        <div id="collapse-10" class="accordion-collapse collapse" aria-labelledby="heading10" data-bs-parent="#treeAccordion">
+                            <div class="accordion-body">
+                                <p><strong>使用介紹：</strong> 可以自己輸入選手名稱加入比賽</p>
+                                <p><strong>用法：</strong> <code>輸入/比賽樹狀圖管理單敗淘汰-生成比賽樹狀圖 {參加者數量建議輸入2/4/8/16/32}{輸入選手名稱每位選手用,隔開} 輸出後就出現比賽樹狀圖。</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</br>當人數與名字不匹配會提示 參賽者數量和提供的名字數量不匹配。</code></p>
+                                <p><strong>使用權限：</strong> 有管理員身份組。</p>
+                                <p><strong>影片示範：</strong></p>
+                                <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video></p>
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading11">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-11" aria-expanded="false" aria-controls="collapse-11">
+                                更新單敗淘汰獲勝者
+                            </button>
+                        </h2>
+                        <div id="collapse-11" class="accordion-collapse collapse" aria-labelledby="heading11" data-bs-parent="#treeAccordion">
+                            <div class="accordion-body">
+                                <p><strong>使用介紹：</strong> 更新比賽樹狀圖的指令</p>
+                                <p><strong>用法：</strong> <code>輸入/比賽樹狀圖-更新單敗淘汰獲勝者 {第幾輪 假如一輪比賽就寫1} {比賽編號 看圖片下一格格子最後數字 假如圖片是該格子寫Winner_R1_N0 則填數字0} {獲勝者名稱} </br>輸出出現更新後的樹狀圖。</code></p>
+                                <p><strong>使用權限：</strong> 有管理員身份組。</p>
+                                <p><strong>影片示範：</strong></p>
+                                <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video></p>
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading12">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-12" aria-expanded="false" aria-controls="collapse-12">
+                                查看比賽樹狀圖 
+                            </button>
+                        </h2>
+                        <div id="collapse-12" class="accordion-collapse collapse" aria-labelledby="heading12" data-bs-parent="#treeAccordion">
+                            <div class="accordion-body">
+                                <p><strong>使用介紹：</strong>查看目前的比賽樹狀圖 </p>
+                                <p><strong>用法：</strong> <code>輸入/比賽樹狀圖-查看比賽樹狀圖 輸出後顯示 這是當前比賽的樹狀圖：並顯示圖片。</br>當未選擇比賽資料夾會提示 請先讓管理員選擇一個比賽資料夾進入編輯模式。</br>如果該比賽沒有樹狀圖則會提示 當前比賽沒有樹狀圖。</code></p>
+                                <p><strong>使用權限：</strong> 有管理員與選手身份組。</p>
+                                <p><strong>影片示範：</strong></p>
+                                <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video></p>
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="swiss" class="commands-list">
+                <h3>瑞士倫無淘汰指令</h3>
+                <div class="accordion" id="swissAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading13">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-13" aria-expanded="false" aria-controls="collapse-13">
+                                設置比賽參數
+                            </button>
+                        </h2>
+                        <div id="collapse-13" class="accordion-collapse collapse" aria-labelledby="heading13" data-bs-parent="#swissAccordion">
+                            <div class="accordion-body">
+                                <p><strong>使用介紹：</strong>可以設定比賽人數跟倫數</p>
+                                <p><strong>用法：</strong> <code>輸入/瑞士制無淘汰-設置比賽參數 {人數} {輪數} 輸出後顯示 成功設置比賽參數：參賽人數上限為 {人數} 人，最大輪次為 {輪數} 輪。</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</br>如果要修改上限請在輸入1次即可更改。</code></p>
+                                <p><strong>使用權限：</strong> 有管理員身份組。</p>
+                                <p><strong>影片示範：</strong></p>
+                                <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video></p>
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading14">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-14" aria-expanded="false" aria-controls="collapse-14">
+                                開始第一輪比賽
+                            </button>
+                        </h2>
+                        <div id="collapse-14" class="accordion-collapse collapse" aria-labelledby="heading14" data-bs-parent="#swissAccordion">
+                            <div class="accordion-body">
+                                <p><strong>使用介紹：</strong>執行第一輪瑞士輪比賽，會依照參賽所有名單隨機匹配對手。當人數為奇數時會有一位第一輪休息</p>
+                                <p><strong>用法：</strong> <code>輸入/瑞士制無淘汰-開始第一輪比賽 輸出後顯示 第一輪比賽對戰名單如下： {選手1}vs{選手2} 依照人數匹配對手</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</br>當人數為奇數時，有一個對戰組合會變成{選手名稱}輪空</code></p>
+                                <p><strong>使用權限：</strong> 有管理員身份組。</p>
+                                <p><strong>影片示範：</strong></p>
+                                <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video></p>
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading15">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-15" aria-expanded="false" aria-controls="collapse-15">
+                                下一輪 
+                            </button>
+                        </h2>
+                        <div id="collapse-15" class="accordion-collapse collapse" aria-labelledby="heading15" data-bs-parent="#swissAccordion">
+                            <div class="accordion-body">
+                                <p><strong>使用介紹：執行瑞士倫下一輪的指令，當使用第一輪後並且登記完分數後執行，會依照分數去匹配對手，也會顯示目前的輪數。</strong></p>
+                                <p><strong>用法：</strong> <code>輸入/瑞士制無淘汰-下一輪 輸出後會顯示 第{目前輪數}輪比賽對戰名單如下:{選手1}vs{選手2} 依照人數匹配對手。</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</br>當人數為奇數時，有一個對戰組合會變成{選手名稱}輪空</code></p>
+                                <p><strong>使用權限：</strong> 有管理員身份組。</p>
+                                <p><strong>影片示範：</strong></p>
+                                <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video></p>
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading16">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-16" aria-expanded="false" aria-controls="collapse-16">
+                                查看分數 
+                            </button>
+                        </h2>
+                        <div id="collapse-16" class="accordion-collapse collapse" aria-labelledby="heading16" data-bs-parent="#swissAccordion">
+                            <div class="accordion-body">
+                                <p><strong>使用介紹：</strong>查看目前瑞士輪所有人的分數。</p>
+                                <p><strong>用法：</strong> <code>輸入/瑞士制無淘汰-查看分數 輸出顯示 當前比賽的分數如下：{選手1}:{分數} {選手2}:{分數} 依照人數顯示。。</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</code></p>
+                                <p><strong>使用權限：</strong> 有管理員與選手身份組。</p>
+                                <p><strong>影片示範：</strong></p>
+                                <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video></p>
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading17">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-17" aria-expanded="false" aria-controls="collapse-17">
+                                更新比分
+                            </button>
+                        </h2>
+                        <div id="collapse-17" class="accordion-collapse collapse" aria-labelledby="heading17" data-bs-parent="#swissAccordion">
+                            <div class="accordion-body">
+                                <p><strong>使用介紹：</strong>更新瑞士輪獲勝者的分數。。</p>
+                                <p><strong>用法：</strong> <code>輸入/瑞士制無淘汰-更新比分 {選手名稱} {可自行選擇輸入分數，沒輸入預設為1分} 輸出後顯示 {選手名稱} 的得分已更新，目前得分：{分數} </br>當輸入選手名稱沒有在名單中會提示 未找到選手 {選手名稱}，請確認輸入是否正確。</br>當未選擇比賽資料夾會提示 請先讓管理員選擇一個比賽資料夾進入編輯模式。</code></p>
+                                <p><strong>使用權限：</strong> 有管理員身份組。</p>
+                                <p><strong>影片示範：</strong></p>
+                                <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video></p>
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+              </div>
+        </div>
+
+            <div id="reminders" class="commands-list">
+                <h3>提醒與公告指令</h3>
+                <div class="accordion" id="remindersAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading19">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-19" aria-expanded="false" aria-controls="collapse-19">
+                                比賽公告
+                            </button>
+                        </h2>
+                        <div id="collapse-19" class="accordion-collapse collapse" aria-labelledby="heading19" data-bs-parent="#remindersAccordion">
+                            <div class="accordion-body">
+                                <p><strong>使用介紹：</strong>可查看該比賽資訊包含比賽名稱 參賽選手 與 樹狀圖。</p>
+                                <p><strong>用法：</strong> <code>輸入/提醒與公告-比賽公告 輸出選擇比賽資料夾 顯示 比賽名稱 參賽選手 與 樹狀圖。 如果沒有設置比賽樹狀圖則不會顯示。</code></p>
+                                <p><strong>使用權限：</strong> 有管理員身份組。</p>
+                                <p><strong>影片示範：</strong></p>
+                                <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video></p>
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading20">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-20" aria-expanded="false" aria-controls="collapse-20">
+                                設置提醒
+                            </button>
+                        </h2>
+                        <div id="collapse-20" class="accordion-collapse collapse" aria-labelledby="heading20" data-bs-parent="#remindersAccordion">
+                            <div class="accordion-body">
+                                <p><strong>使用介紹：</strong>設置時間，時間一到提醒選手們比賽。</p>
+                                <p><strong>用法：</strong> <code>輸入/提醒與公告-設置提醒 {24小時的時間} {分鐘} {頻道ID}輸出後會顯示 比賽提醒已設置為 {年月日} {時間}，提醒頻道為 {頻道名稱} (ID: {頻道ID}) 時間一到就會在指定的頻道顯示 時間到該比賽了。 </br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</br>如果ID輸入錯誤會提示 無法找到 ID 為 1{輸入的ID} 的頻道。</code></p>
+                                <p><strong>使用權限：</strong> 有管理員身份組。</p>
+                                <p><strong>影片示範：</strong></p>
+                                <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video></p>
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+              </div>
+           </div>
+
+            <div id="query" class="commands-list">
+                <h3>指令查詢</h3>
+                <div class="accordion" id="queryAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading22">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-22" aria-expanded="false" aria-controls="collapse-22">
+                                指令查詢
+                        </h2>
+                        <div id="collapse-22" class="accordion-collapse collapse" aria-labelledby="heading22" data-bs-parent="#queryAccordion">
+                            <div class="accordion-body">
+                                <p><strong>使用介紹：</strong>使用此指令直接導入到此網站。。</p>
+                                <p><strong>用法：</strong> <code>輸入/指令查詢 輸出後出現 指令都在這→ {改網站的網址}</code></p>
+                                <p><strong>使用權限：</strong> 有管理員與選手身份組。</p>
+                                <p><strong>影片示範：</strong></p>
+                                <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video></p>
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </div>
+            <div id="ai" class="commands-list">
+                <h3>AI 管理員指令</h3>
+                <div class="accordion" id="aiAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading23">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-23" aria-expanded="false" aria-controls="collapse-23">
+                                生程式AI指令
+                        </h2>
+                        <div id="collapse-23" class="accordion-collapse collapse" aria-labelledby="heading23" data-bs-parent="#aiAccordion">
+                            <div class="accordion-body">
+                                <p><strong>使用介紹：</strong>如果使用者不知道比賽相關的資訊 可以問問此AI 他叫AI管理員 可以叫他 阿管 有任何問題都可以問他。</p>
+                                <p><strong>用法：</strong> <code>輸入!回答 {詢問的問題} 輸出後會依照您問的問題回答你。</code></p>
+                                <p><strong>使用權限：</strong> 所有人。</p>
+                                <p><strong>影片示範：</strong></p>
+                                <video id="demoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop></video></p>
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+            <div id="pending" class="commands-list">
+                <h3>待新增的指令列表</h3>
+                <p>這裡可以列出尚未實現的指令。</p>
+            </div>
+        </section>
     </div>
-        <h3>/瑞士制無淘汰-下一輪 </h3>
-        <p>
-            <strong>使用介紹：</strong> 此指令會根據第一輪的分數進行下一輪的分配對手組合。。
-        </p>
-        <p>
-            <strong>用法：</strong> <code>/瑞士制無淘汰-下一輪 輸出後會出現 開始第{目前的倫數}輪比賽 然後按照相同分數進行匹配。</br>如果有設定倫數，會在最後一輪提示</code>
-        </p>
-        <p>
-            <strong>使用權限：</strong> 有管理員身分組。
-        </p>
-        <!-- 新增 GIF 示範 -->
-        <div class="command-demo">
-            <p><strong>操作示範：</strong></p>
-            <img 
-            src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-            alt="操作示範 GIF" 
-            class="demo-gif" 
-            width="700" 
-            height="400">
 
-    </div> 
-    <h3>/瑞士制無淘汰-查看分數 </h3>
-    <p>
-        <strong>使用介紹：</strong> 查看目前所有人的分數。
-    </p>
-    <p>
-        <strong>用法：</strong> <code>/瑞士制無淘汰-查看分數 輸出後顯示所有人的分數。</code>
-    </p>
-    <p>
-        <strong>使用權限：</strong> 有管理員與選手身分組。
-    </p>
-    <!-- 新增 GIF 示範 -->
-    <div class="command-demo">
-        <p><strong>操作示範：</strong></p>
-        <img 
-        src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-        alt="操作示範 GIF" 
-        class="demo-gif" 
-        width="700" 
-        height="400">
-    </div>
-
-</div>
-                            <div class="command-block purple-bg">
-                            <h1>提醒與公告指令</h1>
-                            <h3>/提醒與公告-比賽公告</h3>
-                            <p>
-                                <strong>使用介紹：</strong> 讓選手可以查看比賽的資訊。
-                            <p>
-                                <strong>用法：</strong> <code>/提醒與公告-比賽公告 輸出後會顯示該比賽的資訊。</code>
-                            </p>
-                            <p>
-                                <strong>使用權限：</strong> 有管理員和選手身分組。
-                            </p>
-                            <!-- 新增 GIF 示範 -->
-                            <div class="command-demo">
-                                <p><strong>操作示範：</strong></p>
-                                <img 
-                                src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-                                alt="操作示範 GIF" 
-                                class="demo-gif" 
-                                width="700" 
-                                height="400">
-
-                                <h3>/提醒與公告-設置提醒</h3>
-                                <p>
-                                    <strong>使用介紹：</strong>設置時間和選手的Discord名稱，時間到後會提醒選手該比賽並且會標註選手Discord的名稱。
-                                </p>
-                                <p>
-                                    <strong>用法：</strong> <code>提醒與公告-設置提醒 {輸入24小時制的時}{分}{選手Discord名稱}</code>
-                                </p>
-                                <p>
-                                    <strong>使用權限：</strong> 有管理員身分組。
-                                </p>
-                                <!-- 新增 GIF 示範 -->
-                                <div class="command-demo">
-                                    <p><strong>操作示範：</strong></p>
-                                    <img 
-                                    src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-                                    alt="操作示範 GIF" 
-                                    class="demo-gif" 
-                                    width="700" 
-                                    height="400">
-                                </div>
-                                </div>
-                                </div>
-                                    <div class="command-block grey-bg">
-                                        <h1>指令查詢</h1>
-                                        <h3>/指令查詢</h3>
-                                        <p>
-                                            <strong>使用介紹：</strong>依照自己的身分組顯示可以使用的指令。
-                                        </p>
-                                        <p>
-                                            <strong>用法：</strong> <code>/指令查詢 輸出後會依照自己的身分組顯示可以使用的指令。</code>
-                                        </p>
-                                        <p>
-                                            <strong>使用權限：</strong> 有管理員和選手身分組。
-                                        </p>
-                                        <!-- 新增 GIF 示範 -->
-                                        <div class="command-demo">
-                                            <p><strong>操作示範：</strong></p>
-                                            <img 
-                                            src="file:///C:/Users/n0486/Desktop/專題%20比賽小幫手/比賽小幫手網站/比賽創建.gif" 
-                                            alt="操作示範 GIF" 
-                                            class="demo-gif" 
-                                            width="700" 
-                                            height="400">
-                                 </div>
-    </section>
-
-    <section id="contact">
-        <h2>聯絡我們</h2>
-        <p>如果有任何建議或者問題，歡迎聯絡我們：</p>
-        <p>Email: <a href="mailto:bear104008@gmail.com">bear104008@gmail.com</a></p>
-        <a href="https://discord.com/oauth2/authorize?client_id=1321339515058651166"class="cta-button">邀請比賽小幫手加入伺服器</a>
-    </section>
-
-    <footer>
+    <footer class="bg-dark text-white text-center py-3">
         <p>&copy; 2024 崑山科技大學 資工系 專題作品</p>
+        <section id="contact" class="mb-5"></section>
+        <p>聯絡我們: <a href="mailto:example@mail.com">example@mail.com</a></p>
     </footer>
 
-    
+    <script>
+        // 切換指令區域顯示
+        document.querySelectorAll('.section-selector button').forEach(button => {
+            button.addEventListener('click', event => {
+                document.querySelectorAll('.section-selector button').forEach(btn => btn.classList.remove('btn-primary'));
+                document.querySelectorAll('.section-selector button').forEach(btn => btn.classList.add('btn-secondary'));
+                button.classList.remove('btn-secondary');
+                button.classList.add('btn-primary');
+
+                document.querySelectorAll('.commands-list').forEach(list => list.classList.remove('active'));
+                const target = button.getAttribute('data-section');
+                document.getElementById(target).classList.add('active');
+            });
+        });
+
+        // 預設所有下拉式選單為關閉狀態
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.accordion .collapse').forEach(collapse => {
+                collapse.classList.remove('show');
+            });
+        });
+    </script>
 </body>
 </html>
-
