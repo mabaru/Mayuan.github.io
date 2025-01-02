@@ -124,7 +124,7 @@
             <ul class="list-group">
                 <li class="list-group-item">可以方便管理選手</li>
                 <li class="list-group-item">可以快速生成比賽樹狀圖</li>
-                <li class="list-group-item">可以使用瑞士倫賽制：無淘汰模式</li>
+                <li class="list-group-item">可以使用瑞士輪賽制：無淘汰模式</li>
                 <li class="list-group-item">未來會新增更多的比賽模式</li>
             </ul>
         </section>
@@ -138,7 +138,7 @@
                 <button class="btn btn-secondary mx-1" data-section="management">比賽管理指令 (4)</button>
                 <button class="btn btn-secondary mx-1" data-section="players">選手管理指令 (5)</button>
                 <button class="btn btn-secondary mx-1" data-section="tree">比賽樹狀圖指令 (3)</button>
-                <button class="btn btn-secondary mx-1" data-section="swiss">瑞士倫無淘汰指令 (5)</button>
+                <button class="btn btn-secondary mx-1" data-section="swiss">瑞士輪無淘汰指令 (5)</button>
                 <button class="btn btn-secondary mx-1" data-section="reminders">提醒與公告指令 (2)</button>
                 <button class="btn btn-secondary mx-1" data-section="query">指令查詢 (1)</button>
                 <button class="btn btn-secondary mx-1" data-section="ai">AI 管理員指令(1)</button>
@@ -428,7 +428,7 @@
             </div>
 
             <div id="swiss" class="commands-list">
-                <h3>瑞士倫無淘汰指令</h3>
+                <h3>瑞士輪無淘汰指令</h3>
                 <div class="accordion" id="swissAccordion">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="heading13">
@@ -482,7 +482,7 @@
                         </h2>
                         <div id="collapse-15" class="accordion-collapse collapse" aria-labelledby="heading15" data-bs-parent="#swissAccordion">
                             <div class="accordion-body">
-                                <p><strong>使用介紹：執行瑞士倫下一輪的指令，當使用第一輪後並且登記完分數後執行，會依照分數去匹配對手，也會顯示目前的輪數。</strong></p>
+                                <p><strong>使用介紹：執行瑞士輪下一輪的指令，當使用第一輪後並且登記完分數後執行，會依照分數去匹配對手，也會顯示目前的輪數。</strong></p>
                                 <p><strong>用法：</strong> <code>輸入/瑞士制無淘汰-下一輪 輸出後會顯示 第{目前輪數}輪比賽對戰名單如下:{選手1}vs{選手2} 依照人數匹配對手。</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</br>當人數為奇數時，有一個對戰組合會變成{選手名稱}輪空</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
                                 <h1>下一輪示範影片</h1>
