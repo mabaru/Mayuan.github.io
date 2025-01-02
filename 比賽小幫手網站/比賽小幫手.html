@@ -44,24 +44,13 @@
         .commands-list.active {
             display: block;
         }
-
-        .demo-video {
-    display: block; /* 讓影片為區塊元素，便於控制 */
-    max-width: 100%; /* 設定最大寬度為容器寬度 */
-    height: auto; /* 高度根據寬度自動調整 */
-    margin: 10px auto; /* 上下左右置中 */
-    border: 2px solid #ddd; /* 增加影片的邊框以便區分 */
-    border-radius: 5px; /* 圓角邊框讓影片更美觀 */
-}
-.carousel-item {
+        .carousel-item {
     transition: transform 0.6s ease-in-out; /* 增加過渡的平滑效果 */
 }
 
 .carousel-inner {
     overflow: hidden; /* 確保內容不超出範圍 */
 }
-
-
 
         
     </style>
@@ -153,7 +142,6 @@
                 <button class="btn btn-secondary mx-1" data-section="reminders">提醒與公告指令 (2)</button>
                 <button class="btn btn-secondary mx-1" data-section="query">指令查詢 (1)</button>
                 <button class="btn btn-secondary mx-1" data-section="ai">AI 管理員指令 </button>
-                <button class="btn btn-secondary mx-1" data-section="pending">待新增的指令列表</button>
             </div>
 
             <div id="management" class="commands-list">
@@ -266,10 +254,10 @@
                                 <p><strong>使用介紹：</strong> 可以自己輸入選手名稱加入比賽</p>
                                 <p><strong>用法：</strong> <code>輸入/選手管理-添加選手 {輸入選手名稱} 輸出後顯示 選手 '{選手名稱}' 已成功添加到比賽中。</br>如果重複輸入則會提示 選手 '{選手名稱}' 已經在比賽中！</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員與選手身份組。</p>
-                                <h1>創建比賽示範影片</h1>
+                                <h1>添加選手示範影片</h1>
                                     <iframe width="560" height="315" 
                                      src="https://www.youtube.com/embed/yhpLrSORSio?si=AchX1e-P8FF5eZsC" 
-                                     title="比賽小幫手 - 創建比賽示範" 
+                                     title="比賽小幫手 - 添加選手示範" 
                                      frameborder="0" 
                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                      allowfullscreen>
@@ -288,10 +276,10 @@
                                 <p><strong>使用介紹：</strong> 利用excel檔案將選手名全部匯入。</p>
                                 <p><strong>用法：</strong> <code>輸入/選手管理-匯入選手名單 {放入Excel檔案}輸出後 顯示成功匯入選手名單，並保留現有分數。</br>當匯入檔案錯誤會出現 Excel 文件中缺少 '{選手名稱or分數}' 列。 </br>當未選擇比賽資料夾會提示 請先讓管理員選擇一個比賽資料夾進入編輯模式。</br>當用excel外的其他檔案匯入則會提示 匯入選手名單時發生錯誤：No such keys(s): 'io.excel.zip.reader'</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
-                                <h1>創建比賽示範影片</h1>
+                                <h1>匯入選手名單示範影片</h1>
                                     <iframe width="560" height="315" 
                                      src="https://www.youtube.com/embed/yhpLrSORSio?si=AchX1e-P8FF5eZsC" 
-                                     title="比賽小幫手 - 創建比賽示範" 
+                                     title="比賽小幫手 - 匯入選手名單示範" 
                                      frameborder="0" 
                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                      allowfullscreen>
@@ -310,10 +298,10 @@
                                 <p><strong>使用介紹：</strong> 給使用者一個範本，讓使用者只要複製選手名單貼到此檔案就可以匯入</p>
                                 <p><strong>用法：</strong> <code>輸入/選手管理-生成Excel檔案範本 輸出後顯示 以下是選手名單的 Excel 範本，請依照範本格式填寫選手資料並上傳:{Excel檔案} 點擊檔案即可下載。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
-                                <h1>創建比賽示範影片</h1>
+                                <h1>生成excel檔案範本示範影片</h1>
                                     <iframe width="560" height="315" 
                                      src="https://www.youtube.com/embed/yhpLrSORSio?si=AchX1e-P8FF5eZsC" 
-                                     title="比賽小幫手 - 創建比賽示範" 
+                                     title="比賽小幫手 - 生成excel檔案範本示範" 
                                      frameborder="0" 
                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                      allowfullscreen>
@@ -330,12 +318,12 @@
                         <div id="collapse-8" class="accordion-collapse collapse" aria-labelledby="heading8" data-bs-parent="#playersAccordion">
                             <div class="accordion-body">
                                 <p><strong>使用介紹：</strong> 使用Discord名稱報名比賽</p>
-                                <p><strong>用法：</strong> <code>輸入/選手管理-加入比賽 輸出後會請您選擇比賽資料夾 選擇好後會出現 {@Discord使用者名稱}已成功加入比賽'{比賽名稱}' </br>如果重複輸入則會提示 '{@Discord使用者名稱}' 已經在'{比賽名稱}'比賽中！</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</code></p>
+                                <p><strong>用法：</strong> <code>輸入/選手管理-加入比賽 輸出後會請您選擇比賽資料夾 選擇好後會出現 {@Discord使用者名稱}已成功加入比賽'{比賽名稱}' </br>當伺服器沒有比賽資料夾會提示，目前沒有可用的資料夾。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員與選手身份組。</p>
-                                <h1>創建比賽示範影片</h1>
+                                <h1>加入比賽示範影片</h1>
                                     <iframe width="560" height="315" 
                                      src="https://www.youtube.com/embed/yhpLrSORSio?si=AchX1e-P8FF5eZsC" 
-                                     title="比賽小幫手 - 創建比賽示範" 
+                                     title="比賽小幫手 - 加入比賽示範" 
                                      frameborder="0" 
                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                      allowfullscreen>
@@ -354,10 +342,10 @@
                                 <p><strong>使用介紹：</strong>輸入名單中的名字後即可移除</p>
                                 <p><strong>用法：</strong> <code>輸入/選手管理-移除選手 {選手名稱} 輸出後會出現 選手 '{選手名稱}' 已成功從比賽中移除。</br>如果輸入沒有在名單中的名稱會出現 選手 '{選手名稱}' 不在參賽名單中。</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員與選手身份組。</p>
-                                <h1>創建比賽示範影片</h1>
+                                <h1>移除選手示範影片</h1>
                                     <iframe width="560" height="315" 
                                      src="https://www.youtube.com/embed/yhpLrSORSio?si=AchX1e-P8FF5eZsC" 
-                                     title="比賽小幫手 - 創建比賽示範" 
+                                     title="比賽小幫手 - 移除選手示範" 
                                      frameborder="0" 
                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                      allowfullscreen>
@@ -381,10 +369,10 @@
                                 <p><strong>使用介紹：</strong> 可以自己輸入選手名稱加入比賽</p>
                                 <p><strong>用法：</strong> <code>輸入/比賽樹狀圖管理單敗淘汰-生成比賽樹狀圖 {參加者數量建議輸入2/4/8/16/32}{輸入選手名稱每位選手用,隔開} 輸出後就出現比賽樹狀圖。</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</br>當人數與名字不匹配會提示 參賽者數量和提供的名字數量不匹配。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
-                                <h1>創建比賽示範影片</h1>
+                                <h1>生成單敗淘汰賽的樹狀圖示範影片</h1>
                                     <iframe width="560" height="315" 
                                      src="https://www.youtube.com/embed/yhpLrSORSio?si=AchX1e-P8FF5eZsC" 
-                                     title="比賽小幫手 - 創建比賽示範" 
+                                     title="比賽小幫手 - 生成單敗淘汰賽的樹狀圖示範" 
                                      frameborder="0" 
                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                      allowfullscreen>
@@ -403,10 +391,10 @@
                                 <p><strong>使用介紹：</strong> 更新比賽樹狀圖的指令</p>
                                 <p><strong>用法：</strong> <code>輸入/比賽樹狀圖-更新單敗淘汰獲勝者 {第幾輪 假如一輪比賽就寫1} {比賽編號 看圖片下一格格子最後數字 假如圖片是該格子寫Winner_R1_N0 則填數字0} {獲勝者名稱} </br>輸出出現更新後的樹狀圖。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
-                                <h1>創建比賽示範影片</h1>
+                                <h1>更新單敗淘汰獲勝者示範影片</h1>
                                     <iframe width="560" height="315" 
                                      src="https://www.youtube.com/embed/yhpLrSORSio?si=AchX1e-P8FF5eZsC" 
-                                     title="比賽小幫手 - 創建比賽示範" 
+                                     title="比賽小幫手 - 更新單敗淘汰獲勝者示範" 
                                      frameborder="0" 
                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                      allowfullscreen>
@@ -425,10 +413,10 @@
                                 <p><strong>使用介紹：</strong>查看目前的比賽樹狀圖 </p>
                                 <p><strong>用法：</strong> <code>輸入/比賽樹狀圖-查看比賽樹狀圖 輸出後顯示 這是當前比賽的樹狀圖：並顯示圖片。</br>當未選擇比賽資料夾會提示 請先讓管理員選擇一個比賽資料夾進入編輯模式。</br>如果該比賽沒有樹狀圖則會提示 當前比賽沒有樹狀圖。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員與選手身份組。</p>
-                                <h1>創建比賽示範影片</h1>
+                                <h1>查看比賽樹狀圖示範影片</h1>
                                     <iframe width="560" height="315" 
                                      src="https://www.youtube.com/embed/yhpLrSORSio?si=AchX1e-P8FF5eZsC" 
-                                     title="比賽小幫手 - 創建比賽示範" 
+                                     title="比賽小幫手 - 查看比賽樹狀圖示範" 
                                      frameborder="0" 
                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                      allowfullscreen>
@@ -453,10 +441,10 @@
                                 <p><strong>使用介紹：</strong>可以設定比賽人數跟倫數</p>
                                 <p><strong>用法：</strong> <code>輸入/瑞士制無淘汰-設置比賽參數 {人數} {輪數} 輸出後顯示 成功設置比賽參數：參賽人數上限為 {人數} 人，最大輪次為 {輪數} 輪。</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</br>如果要修改上限請在輸入1次即可更改。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
-                                <h1>創建比賽示範影片</h1>
+                                <h1>設置比賽參數示範影片</h1>
                                     <iframe width="560" height="315" 
                                      src="https://www.youtube.com/embed/yhpLrSORSio?si=AchX1e-P8FF5eZsC" 
-                                     title="比賽小幫手 - 創建比賽示範" 
+                                     title="比賽小幫手 - 設置比賽參數示範" 
                                      frameborder="0" 
                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                      allowfullscreen>
@@ -475,10 +463,10 @@
                                 <p><strong>使用介紹：</strong>執行第一輪瑞士輪比賽，會依照參賽所有名單隨機匹配對手。當人數為奇數時會有一位第一輪休息</p>
                                 <p><strong>用法：</strong> <code>輸入/瑞士制無淘汰-開始第一輪比賽 輸出後顯示 第一輪比賽對戰名單如下： {選手1}vs{選手2} 依照人數匹配對手</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</br>當人數為奇數時，有一個對戰組合會變成{選手名稱}輪空</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
-                                <h1>創建比賽示範影片</h1>
+                                <h1>開始第一輪比賽示範影片</h1>
                                     <iframe width="560" height="315" 
                                      src="https://www.youtube.com/embed/yhpLrSORSio?si=AchX1e-P8FF5eZsC" 
-                                     title="比賽小幫手 - 創建比賽示範" 
+                                     title="比賽小幫手 - 開始第一輪比賽" 
                                      frameborder="0" 
                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                      allowfullscreen>
@@ -497,10 +485,10 @@
                                 <p><strong>使用介紹：執行瑞士倫下一輪的指令，當使用第一輪後並且登記完分數後執行，會依照分數去匹配對手，也會顯示目前的輪數。</strong></p>
                                 <p><strong>用法：</strong> <code>輸入/瑞士制無淘汰-下一輪 輸出後會顯示 第{目前輪數}輪比賽對戰名單如下:{選手1}vs{選手2} 依照人數匹配對手。</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</br>當人數為奇數時，有一個對戰組合會變成{選手名稱}輪空</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
-                                <h1>創建比賽示範影片</h1>
+                                <h1>下一輪示範影片</h1>
                                     <iframe width="560" height="315" 
                                      src="https://www.youtube.com/embed/yhpLrSORSio?si=AchX1e-P8FF5eZsC" 
-                                     title="比賽小幫手 - 創建比賽示範" 
+                                     title="比賽小幫手 - 下一輪示範" 
                                      frameborder="0" 
                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                      allowfullscreen>
@@ -519,10 +507,10 @@
                                 <p><strong>使用介紹：</strong>查看目前瑞士輪所有人的分數。</p>
                                 <p><strong>用法：</strong> <code>輸入/瑞士制無淘汰-查看分數 輸出顯示 當前比賽的分數如下：{選手1}:{分數} {選手2}:{分數} 依照人數顯示。。</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員與選手身份組。</p>
-                                <h1>創建比賽示範影片</h1>
+                                <h1>查看分數示範影片</h1>
                                     <iframe width="560" height="315" 
                                      src="https://www.youtube.com/embed/yhpLrSORSio?si=AchX1e-P8FF5eZsC" 
-                                     title="比賽小幫手 - 創建比賽示範" 
+                                     title="比賽小幫手 - 查看分數示範" 
                                      frameborder="0" 
                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                      allowfullscreen>
@@ -541,10 +529,10 @@
                                 <p><strong>使用介紹：</strong>更新瑞士輪獲勝者的分數。。</p>
                                 <p><strong>用法：</strong> <code>輸入/瑞士制無淘汰-更新比分 {選手名稱} {可自行選擇輸入分數，沒輸入預設為1分} 輸出後顯示 {選手名稱} 的得分已更新，目前得分：{分數} </br>當輸入選手名稱沒有在名單中會提示 未找到選手 {選手名稱}，請確認輸入是否正確。</br>當未選擇比賽資料夾會提示 請先讓管理員選擇一個比賽資料夾進入編輯模式。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
-                                <h1>創建比賽示範影片</h1>
+                                <h1>更新比分示範影片</h1>
                                     <iframe width="560" height="315" 
                                      src="https://www.youtube.com/embed/yhpLrSORSio?si=AchX1e-P8FF5eZsC" 
-                                     title="比賽小幫手 - 創建比賽示範" 
+                                     title="比賽小幫手 - 更新比分示範" 
                                      frameborder="0" 
                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                      allowfullscreen>
@@ -569,10 +557,10 @@
                                 <p><strong>使用介紹：</strong>可查看該比賽資訊包含比賽名稱 參賽選手 與 樹狀圖。</p>
                                 <p><strong>用法：</strong> <code>輸入/提醒與公告-比賽公告 輸出選擇比賽資料夾 顯示 比賽名稱 參賽選手 與 樹狀圖。 如果沒有設置比賽樹狀圖則不會顯示。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
-                                <h1>創建比賽示範影片</h1>
+                                <h1>比賽公告示範影片</h1>
                                     <iframe width="560" height="315" 
                                      src="https://www.youtube.com/embed/yhpLrSORSio?si=AchX1e-P8FF5eZsC" 
-                                     title="比賽小幫手 - 創建比賽示範" 
+                                     title="比賽小幫手 - 比賽公告示範" 
                                      frameborder="0" 
                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                      allowfullscreen>
@@ -591,10 +579,10 @@
                                 <p><strong>使用介紹：</strong>設置時間，時間一到提醒選手們比賽。</p>
                                 <p><strong>用法：</strong> <code>輸入/提醒與公告-設置提醒 {24小時的時間} {分鐘} {頻道ID}輸出後會顯示 比賽提醒已設置為 {年月日} {時間}，提醒頻道為 {頻道名稱} (ID: {頻道ID}) 時間一到就會在指定的頻道顯示 時間到該比賽了。 </br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</br>如果ID輸入錯誤會提示 無法找到 ID 為 1{輸入的ID} 的頻道。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
-                                <h1>創建比賽示範影片</h1>
+                                <h1>設置提醒示範影片</h1>
                                     <iframe width="560" height="315" 
                                      src="https://www.youtube.com/embed/yhpLrSORSio?si=AchX1e-P8FF5eZsC" 
-                                     title="比賽小幫手 - 創建比賽示範" 
+                                     title="比賽小幫手 - 設置提醒示範" 
                                      frameborder="0" 
                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                      allowfullscreen>
@@ -618,10 +606,10 @@
                                 <p><strong>使用介紹：</strong>使用此指令直接導入到此網站。。</p>
                                 <p><strong>用法：</strong> <code>輸入/指令查詢 輸出後出現 指令都在這→ {改網站的網址}</code></p>
                                 <p><strong>使用權限：</strong> 有管理員與選手身份組。</p>
-                                <h1>創建比賽示範影片</h1>
+                                <h1>指令查詢示範</h1>
                                     <iframe width="560" height="315" 
                                      src="https://www.youtube.com/embed/yhpLrSORSio?si=AchX1e-P8FF5eZsC" 
-                                     title="比賽小幫手 - 創建比賽示範" 
+                                     title="比賽小幫手 - 指令查詢示範" 
                                      frameborder="0" 
                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                      allowfullscreen>
@@ -644,21 +632,14 @@
                                 <p><strong>使用介紹：</strong>如果使用者不知道比賽相關的資訊 可以問問此AI 他叫AI管理員 可以叫他 阿管 有任何問題都可以問他。</p>
                                 <p><strong>用法：</strong> <code>輸入!回答 {詢問的問題} 輸出後會依照您問的問題回答你。</code></p>
                                 <p><strong>使用權限：</strong> 所有人。</p>
-                                <h1>創建比賽示範影片</h1>
+                                <h1>AI指令示範影片</h1>
                                     <iframe width="560" height="315" 
                                      src="https://www.youtube.com/embed/yhpLrSORSio?si=AchX1e-P8FF5eZsC" 
-                                     title="比賽小幫手 - 創建比賽示範" 
+                                     title="比賽小幫手 - AI指令示範" 
                                      frameborder="0" 
                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                      allowfullscreen>
                                 </iframe>
-                            </div>
-                        </div>
-                    </div>
-            <div id="pending" class="commands-list">
-                <h3>待新增的指令列表</h3>
-                <p>這裡可以列出尚未實現的指令。</p>
-            </div>
         </section>
     </div>
 
