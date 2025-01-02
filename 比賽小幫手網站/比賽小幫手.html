@@ -15,16 +15,18 @@
         }
 
         .carousel-container {
-            max-width: 50%;
-            margin: auto;
-            margin-bottom: 2rem;
-        }
+    max-width: 70%; /* 最大寬度為裝置寬度的 90% */
+    margin: auto; /* 垂直與水平置中 */
+    margin-bottom: 2rem; /* 與下方保持距離 */
+}
 
-        .carousel img {
-            object-fit: cover;
-            width: 100%;
-            height: auto;
-        }
+.carousel img {
+    object-fit: cover; /* 確保圖片充滿容器且保持比例 */
+    width: 100%; /* 自動適應容器寬度 */
+    max-height: 70vh; /* 最大高度為視窗高度的 70% */
+    height: auto; /* 高度自動調整 */
+}
+
 
         .section-selector {
     display: flex; /* 使用彈性盒模型排列按鈕 */
@@ -51,6 +53,15 @@
     border: 2px solid #ddd; /* 增加影片的邊框以便區分 */
     border-radius: 5px; /* 圓角邊框讓影片更美觀 */
 }
+.carousel-item {
+    transition: transform 0.6s ease-in-out; /* 增加過渡的平滑效果 */
+}
+
+.carousel-inner {
+    overflow: hidden; /* 確保內容不超出範圍 */
+}
+
+
 
         
     </style>
@@ -88,8 +99,8 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <a href="https://youtu.be/dQw4w9WgXcQ?si=8UslE3soZbq-Y04Y" target="_blank">
-                            <img src="https://github.com/mabaru/mayuan.github.io/blob/main/%E6%AF%94%E8%B3%BD%E5%B0%8F%E5%B9%AB%E6%89%8B%E7%B6%B2%E7%AB%99/%E6%AF%94%E8%B3%BD%E5%B0%8F%E5%B9%AB%E6%89%8B%E7%B6%B2%E7%AB%99%E6%AD%A1%E8%BF%8E%E5%9C%96%E7%89%87.png?raw=true" class="d-block w-100" alt="Slide 1">
+                        <a href="https://github.com/mabaru/mayuan.github.io/blob/main/%E6%AF%94%E8%B3%BD%E5%B0%8F%E5%B9%AB%E6%89%8B%E7%B6%B2%E7%AB%99/%E6%AF%94%E8%B3%BD%E5%B0%8F%E5%B9%AB%E6%89%8B%E7%B6%B2%E7%AB%99%E6%AD%A1%E8%BF%8E%E5%9C%96%E7%89%87.png?raw=true" target="_blank">
+                            <img src="C:\Users\n0486\Desktop\專題 比賽小幫手\比賽小幫手網站\比賽小幫手網站歡迎圖片.png" class="d-block w-100" alt="Slide 1">
                         </a>
                     </div>
                     <div class="carousel-item">
@@ -99,7 +110,7 @@
                     </div>
                     <div class="carousel-item">
                         <a href="https://www.youtube.com/watch?v=example3" target="_blank">
-                            <img src=https://github.com/mabaru/mayuan.github.io/blob/main/%E6%AF%94%E8%B3%BD%E5%B0%8F%E5%B9%AB%E6%89%8B%E7%B6%B2%E7%AB%99/%E6%AF%94%E8%B3%BD%E5%B0%8F%E5%B9%AB%E6%89%8B%E9%82%80%E8%AB%8B%E5%9C%96%E7%89%87.png?raw=true" class="d-block w-100" alt="Slide 3">
+                            <img src="https://via.placeholder.com/800x400" class="d-block w-100" alt="Slide 3">
                         </a>
                     </div>
                 </div>
@@ -160,7 +171,7 @@
                                 <p><strong>用法：</strong> <code>輸入/比賽管理-創建比賽 {比賽名稱} 輸出後會出現伺服器 {伺服器ID} 的比賽 "{比賽名稱}" 已成功創建！ </br>當輸入此伺服器有的比賽名稱後會顯示比賽 "{比賽名稱}" 已經存在於伺服器 {伺服器ID}，請選擇另一個名稱。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
                                 <p><strong>影片示範：</strong></p>
-                                <video class="demo-video" autoplay muted loop>
+                                <video class="demo-video" controls autoplay muted loop>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -179,7 +190,7 @@
                                 <p><strong>用法：</strong> <code>輸入/比賽管理-比賽編輯模式選擇 輸出後顯示下拉式選單 選擇一個比賽名稱顯示已選擇比賽資料夾：{選擇的比賽名稱選擇的比賽名稱}。<br>如果此伺服器沒有創建過比賽的資料夾則會顯示 目前伺服器中沒有可用的比賽資料夾。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
                                 <p><strong>影片示範：</strong></p>
-                                <video class="demo-video" autoplay muted loop>
+                                <video class="demo-video" controls autoplay muted loop>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -197,7 +208,7 @@
                             <p><strong>用法：</strong> <code>輸入/比賽管理-退出比賽編輯模式 輸出後 顯示已退出比賽編輯模式。</code></p>
                             <p><strong>使用權限：</strong> 有管理員身份組。</p>
                             <p><strong>影片示範：</strong></p>
-                            <video class="demo-video" autoplay muted loop>
+                            <video class="demo-video" controls autoplay muted loop>
                                 <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                             </video>
                         </div>
@@ -215,7 +226,7 @@
                             <p><strong>用法：</strong> <code>輸入/比賽管理-刪除目前資料夾 輸出後顯示 你確定要刪除比賽資料夾 '{比賽名稱}' 嗎？此操作無法撤銷！並有確認刪除雨取消的按鈕選項。<br>選擇刪除出現 比賽資料夾 '{比賽名稱}' 已成功刪除。<br>選擇取消顯示 操作已取消。<br>當沒有選擇比賽資料夾則會提示 請先進入比賽編輯模式，選擇要刪除的比賽資料夾。</code></p>
                             <p><strong>使用權限：</strong> 有管理員身份組。</p>
                             <p><strong>影片示範：</strong></p>
-                            <video class="demo-video" autoplay muted loop>
+                            <video class="demo-video" controls autoplay muted loop>
                                 <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                             </video>
                         </div>
@@ -240,7 +251,7 @@
                                 <p><strong>用法：</strong> <code>輸入/選手管理-添加選手 {輸入選手名稱} 輸出後顯示 選手 '{選手名稱}' 已成功添加到比賽中。</br>如果重複輸入則會提示 選手 '{選手名稱}' 已經在比賽中！</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員與選手身份組。</p>
                                 <p><strong>影片示範：</strong></p>
-                                <video class="demo-video" autoplay muted loop>
+                                <video class="demo-video" controls autoplay muted loop>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -258,7 +269,7 @@
                                 <p><strong>用法：</strong> <code>輸入/選手管理-匯入選手名單 {放入Excel檔案}輸出後 顯示成功匯入選手名單，並保留現有分數。</br>當匯入檔案錯誤會出現 Excel 文件中缺少 '{選手名稱or分數}' 列。 </br>當未選擇比賽資料夾會提示 請先讓管理員選擇一個比賽資料夾進入編輯模式。</br>當用excel外的其他檔案匯入則會提示 匯入選手名單時發生錯誤：No such keys(s): 'io.excel.zip.reader'</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
                                 <p><strong>影片示範：</strong></p>
-                                <video class="demo-video" autoplay muted loop>
+                                <video class="demo-video" controls autoplay muted loop>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -276,7 +287,7 @@
                                 <p><strong>用法：</strong> <code>輸入/選手管理-生成Excel檔案範本 輸出後顯示 以下是選手名單的 Excel 範本，請依照範本格式填寫選手資料並上傳:{Excel檔案} 點擊檔案即可下載。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
                                 <p><strong>影片示範：</strong></p>
-                                <video class="demo-video" autoplay muted loop>
+                                <video class="demo-video" controls autoplay muted loop>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -294,7 +305,7 @@
                                 <p><strong>用法：</strong> <code>輸入/選手管理-加入比賽 輸出後會請您選擇比賽資料夾 選擇好後會出現 {@Discord使用者名稱}已成功加入比賽'{比賽名稱}' </br>如果重複輸入則會提示 '{@Discord使用者名稱}' 已經在'{比賽名稱}'比賽中！</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員與選手身份組。</p>
                                 <p><strong>影片示範：</strong></p>
-                                <video class="demo-video" autoplay muted loop>
+                                <video class="demo-video" controls autoplay muted loop>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -312,7 +323,7 @@
                                 <p><strong>用法：</strong> <code>輸入/選手管理-移除選手 {選手名稱} 輸出後會出現 選手 '{選手名稱}' 已成功從比賽中移除。</br>如果輸入沒有在名單中的名稱會出現 選手 '{選手名稱}' 不在參賽名單中。</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員與選手身份組。</p>
                                 <p><strong>影片示範：</strong></p>
-                                <video class="demo-video" autoplay muted loop>
+                                <video class="demo-video" controls autoplay muted loop>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -335,7 +346,7 @@
                                 <p><strong>用法：</strong> <code>輸入/比賽樹狀圖管理單敗淘汰-生成比賽樹狀圖 {參加者數量建議輸入2/4/8/16/32}{輸入選手名稱每位選手用,隔開} 輸出後就出現比賽樹狀圖。</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</br>當人數與名字不匹配會提示 參賽者數量和提供的名字數量不匹配。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
                                 <p><strong>影片示範：</strong></p>
-                                <video class="demo-video" autoplay muted loop>
+                                <video class="demo-video" controls autoplay muted loop>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -353,7 +364,7 @@
                                 <p><strong>用法：</strong> <code>輸入/比賽樹狀圖-更新單敗淘汰獲勝者 {第幾輪 假如一輪比賽就寫1} {比賽編號 看圖片下一格格子最後數字 假如圖片是該格子寫Winner_R1_N0 則填數字0} {獲勝者名稱} </br>輸出出現更新後的樹狀圖。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
                                 <p><strong>影片示範：</strong></p>
-                                <video class="demo-video" autoplay muted loop>
+                                <video class="demo-video" controls autoplay muted loop>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -371,7 +382,7 @@
                                 <p><strong>用法：</strong> <code>輸入/比賽樹狀圖-查看比賽樹狀圖 輸出後顯示 這是當前比賽的樹狀圖：並顯示圖片。</br>當未選擇比賽資料夾會提示 請先讓管理員選擇一個比賽資料夾進入編輯模式。</br>如果該比賽沒有樹狀圖則會提示 當前比賽沒有樹狀圖。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員與選手身份組。</p>
                                 <p><strong>影片示範：</strong></p>
-                                <video class="demo-video" autoplay muted loop>
+                                <video class="demo-video" controls autoplay muted loop>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -395,7 +406,7 @@
                                 <p><strong>用法：</strong> <code>輸入/瑞士制無淘汰-設置比賽參數 {人數} {輪數} 輸出後顯示 成功設置比賽參數：參賽人數上限為 {人數} 人，最大輪次為 {輪數} 輪。</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</br>如果要修改上限請在輸入1次即可更改。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
                                 <p><strong>影片示範：</strong></p>
-                                <video class="demo-video" autoplay muted loop>
+                                <video class="demo-video" controls autoplay muted loop>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -413,7 +424,7 @@
                                 <p><strong>用法：</strong> <code>輸入/瑞士制無淘汰-開始第一輪比賽 輸出後顯示 第一輪比賽對戰名單如下： {選手1}vs{選手2} 依照人數匹配對手</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</br>當人數為奇數時，有一個對戰組合會變成{選手名稱}輪空</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
                                 <p><strong>影片示範：</strong></p>
-                                <video class="demo-video" autoplay muted loop>
+                                <video class="demo-video" controls autoplay muted loop>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -431,7 +442,7 @@
                                 <p><strong>用法：</strong> <code>輸入/瑞士制無淘汰-下一輪 輸出後會顯示 第{目前輪數}輪比賽對戰名單如下:{選手1}vs{選手2} 依照人數匹配對手。</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</br>當人數為奇數時，有一個對戰組合會變成{選手名稱}輪空</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
                                 <p><strong>影片示範：</strong></p>
-                                <video class="demo-video" autoplay muted loop>
+                                <video class="demo-video" controls autoplay muted loop>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -449,7 +460,7 @@
                                 <p><strong>用法：</strong> <code>輸入/瑞士制無淘汰-查看分數 輸出顯示 當前比賽的分數如下：{選手1}:{分數} {選手2}:{分數} 依照人數顯示。。</br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員與選手身份組。</p>
                                 <p><strong>影片示範：</strong></p>
-                                <video class="demo-video" autoplay muted loop>
+                                <video class="demo-video" controls autoplay muted loop>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -467,7 +478,7 @@
                                 <p><strong>用法：</strong> <code>輸入/瑞士制無淘汰-更新比分 {選手名稱} {可自行選擇輸入分數，沒輸入預設為1分} 輸出後顯示 {選手名稱} 的得分已更新，目前得分：{分數} </br>當輸入選手名稱沒有在名單中會提示 未找到選手 {選手名稱}，請確認輸入是否正確。</br>當未選擇比賽資料夾會提示 請先讓管理員選擇一個比賽資料夾進入編輯模式。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
                                 <p><strong>影片示範：</strong></p>
-                                <video class="demo-video" autoplay muted loop>
+                                <video class="demo-video" controls autoplay muted loop>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -491,7 +502,7 @@
                                 <p><strong>用法：</strong> <code>輸入/提醒與公告-比賽公告 輸出選擇比賽資料夾 顯示 比賽名稱 參賽選手 與 樹狀圖。 如果沒有設置比賽樹狀圖則不會顯示。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
                                 <p><strong>影片示範：</strong></p>
-                                <video class="demo-video" autoplay muted loop>
+                                <video class="demo-video" controls autoplay muted loop>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -509,7 +520,7 @@
                                 <p><strong>用法：</strong> <code>輸入/提醒與公告-設置提醒 {24小時的時間} {分鐘} {頻道ID}輸出後會顯示 比賽提醒已設置為 {年月日} {時間}，提醒頻道為 {頻道名稱} (ID: {頻道ID}) 時間一到就會在指定的頻道顯示 時間到該比賽了。 </br>當未選擇比賽資料夾會提示 請先選擇一個比賽資料夾進入編輯模式。</br>如果ID輸入錯誤會提示 無法找到 ID 為 1{輸入的ID} 的頻道。</code></p>
                                 <p><strong>使用權限：</strong> 有管理員身份組。</p>
                                 <p><strong>影片示範：</strong></p>
-                                <video class="demo-video" autoplay muted loop>
+                                <video class="demo-video" controls autoplay muted loop>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -532,7 +543,7 @@
                                 <p><strong>用法：</strong> <code>輸入/指令查詢 輸出後出現 指令都在這→ {改網站的網址}</code></p>
                                 <p><strong>使用權限：</strong> 有管理員與選手身份組。</p>
                                 <p><strong>影片示範：</strong></p>
-                                <video class="demo-video" autoplay muted loop>
+                                <video class="demo-video" controls autoplay muted loop>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -554,7 +565,7 @@
                                 <p><strong>用法：</strong> <code>輸入!回答 {詢問的問題} 輸出後會依照您問的問題回答你。</code></p>
                                 <p><strong>使用權限：</strong> 所有人。</p>
                                 <p><strong>影片示範：</strong></p>
-                                <video class="demo-video" autoplay muted loop>
+                                <video class="demo-video" controls autoplay muted loop>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -594,6 +605,34 @@
                 collapse.classList.remove('show');
             });
         });
+        document.querySelectorAll('.demo-video').forEach(video => {
+    video.addEventListener('dblclick', () => {
+        if (video.requestFullscreen) {
+            video.requestFullscreen(); // HTML5 標準
+        } else if (video.webkitRequestFullscreen) {
+            video.webkitRequestFullscreen(); // Safari
+        } else if (video.msRequestFullscreen) {
+            video.msRequestFullscreen(); // IE/Edge
+        }
+    });
+});
+// 確認變數 carousel 只宣告一次
+const carousel = document.querySelector('#carouselExampleIndicators');
+
+carousel.addEventListener('slid.bs.carousel', (event) => {
+    const totalItems = document.querySelectorAll('.carousel-item').length;
+    const activeIndex = Array.from(event.target.querySelectorAll('.carousel-item')).indexOf(event.relatedTarget);
+
+    // 模擬從最後一張滑動到第一張的效果
+    if (activeIndex === 0 && event.direction === 'left') {
+        carousel.classList.remove('carousel');
+        setTimeout(() => {
+            carousel.classList.add('carousel');
+        }, 10);
+    }
+});
+
+
     </script>
 </body>
 </html>
